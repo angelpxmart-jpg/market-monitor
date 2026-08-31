@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股下殺台股觀察</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d26;
+    --border: #2d3148;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --accent: #6366f1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    padding: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+  h2 { font-size: 15px; font-weight: 600; color: var(--accent);
+        margin: 24px 0 10px; letter-spacing: .5px; }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: var(--card);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 8px 10px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  th:first-child, th:nth-child(2) { text-align: left; }
+  td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+    text-align: right;
+  }
+  td:first-child, td:nth-child(2) { text-align: left; }
+  tr:last-child td { border-bottom: none; }
+  tr.in-zone td { background: rgba(34,197,94,.08); }
+  tr.in-zone td:first-child { border-left: 3px solid var(--green); }
+  tr.near-zone td { background: rgba(234,179,8,.06); }
+  tr.near-zone td:first-child { border-left: 3px solid var(--yellow); }
+  .code { font-family: monospace; color: var(--accent); font-weight: 600; }
+  .na { color: var(--muted); font-style: italic; }
+  .neg { color: var(--red); }
+  .empty-log { text-align: center; color: var(--muted); padding: 20px; font-style: italic; }
+  .dist-cell { font-size: 13px; }
+  .target-cell { font-size: 13px; }
+  .updated { color: var(--muted); font-size: 12px; margin-top: 28px; text-align: right; }
+  @media (max-width: 600px) {
+    body { font-size: 13px; padding: 12px; }
+    td, th { padding: 7px 6px; }
+    .dist-cell, .target-cell { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>美股下殺台股觀察</h1>
+<p class="subtitle">SOX 跌幅 ≥ 2% 時自動記錄，追蹤體質健康的台股連動情況</p>
+
+<h2>▸ 觀察名單</h2>
+<table>
+  <thead>
+    <tr>
+      <th>代號</th>
+      <th>名稱</th>
+      <th>現價</th>
+      <th>MA60</th>
+      <th>MA120</th>
+      <th>觀察目標區</th>
+      <th>距目標區</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+        <tr>
+          <td><span class="code">2330</span></td>
+          <td>台積電</td>
+          <td>2,405.0</td>
+          <td>2,384.5</td>
+          <td>2,236.7</td>
+          <td class="target-cell">2150~2300</td>
+          <td class="dist-cell">-4.6%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2454</span></td>
+          <td>聯發科</td>
+          <td>3,925.0</td>
+          <td>3,951.2</td>
+          <td>3,299.2</td>
+          <td class="target-cell">3100~3400</td>
+          <td class="dist-cell">-15.4%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3711</span></td>
+          <td>日月光投控</td>
+          <td>584.0</td>
+          <td>614.6</td>
+          <td>537.5</td>
+          <td class="target-cell">500~560</td>
+          <td class="dist-cell">-4.3%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">5274</span></td>
+          <td>信驊</td>
+          <td>16,065.0</td>
+          <td>15,379.0</td>
+          <td>14,400.4</td>
+          <td class="target-cell">13500~15000</td>
+          <td class="dist-cell">-7.1%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">6533</span></td>
+          <td>矽力-KY</td>
+          <td>261.0</td>
+          <td>221.3</td>
+          <td>217.6</td>
+          <td class="target-cell">205~225</td>
+          <td class="dist-cell">-16.0%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2382</span></td>
+          <td>廣達</td>
+          <td>338.5</td>
+          <td>337.1</td>
+          <td>320.7</td>
+          <td class="target-cell">300~325</td>
+          <td class="dist-cell">-4.2%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">6669</span></td>
+          <td>緯穎</td>
+          <td>7,095.0</td>
+          <td>5,471.2</td>
+          <td>4,910.2</td>
+          <td class="target-cell">4800~5500</td>
+          <td class="dist-cell">-29.0%（偏高）</td>
+        </tr>
+
+        <tr class="in-zone">
+          <td><span class="code">6230</span></td>
+          <td>超眾</td>
+          <td>108.0</td>
+          <td>118.3</td>
+          <td>135.0</td>
+          <td class="target-cell">100~112</td>
+          <td class="dist-cell">✅ 在目標區</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3324</span></td>
+          <td>双鴻</td>
+          <td>1,250.0</td>
+          <td>989.9</td>
+          <td>1,012.9</td>
+          <td class="target-cell">950~1050</td>
+          <td class="dist-cell">-19.0%（偏高）</td>
+        </tr>
+
+        <tr class="in-zone">
+          <td><span class="code">2308</span></td>
+          <td>台達電</td>
+          <td>1,840.0</td>
+          <td>1,877.9</td>
+          <td>1,886.8</td>
+          <td class="target-cell">1700~1850</td>
+          <td class="dist-cell">✅ 在目標區</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3008</span></td>
+          <td>大立光</td>
+          <td>7,650.0</td>
+          <td>4,581.7</td>
+          <td>3,658.1</td>
+          <td class="target-cell">4300~4800</td>
+          <td class="dist-cell">-59.4%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">4938</span></td>
+          <td>和碩</td>
+          <td>91.1</td>
+          <td>86.1</td>
+          <td>82.0</td>
+          <td class="target-cell">78~88</td>
+          <td class="dist-cell">-3.5%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2474</span></td>
+          <td>可成</td>
+          <td>208.5</td>
+          <td>196.5</td>
+          <td>195.4</td>
+          <td class="target-cell">185~200</td>
+          <td class="dist-cell">-4.2%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2354</span></td>
+          <td>鴻準</td>
+          <td>64.7</td>
+          <td>57.5</td>
+          <td>55.8</td>
+          <td class="target-cell">53~60</td>
+          <td class="dist-cell">-7.8%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2345</span></td>
+          <td>智邦</td>
+          <td>2,035.0</td>
+          <td>2,290.3</td>
+          <td>2,181.0</td>
+          <td class="target-cell">1850~2000</td>
+          <td class="dist-cell">-1.8%（偏高）</td>
+        </tr>
+
+        <tr class="in-zone">
+          <td><span class="code">5388</span></td>
+          <td>中磊</td>
+          <td>77.2</td>
+          <td>83.3</td>
+          <td>82.0</td>
+          <td class="target-cell">70~78</td>
+          <td class="dist-cell">✅ 在目標區</td>
+        </tr>
+  </tbody>
+</table>
+
+<h2>▸ 下殺事件日誌</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">日期</th>
+      <th style="text-align:left">SOX 跌幅</th>
+      <th style="text-align:left">美股指數</th>
+      <th>台股平均跌幅</th>
+      <th>跌最多</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td colspan="5" class="empty-log">目前無觸發記錄</td></tr>
+  </tbody>
+</table>
+
+<p class="updated">最後更新：2026/08/31 15:59</p>
+
+</body>
+</html>

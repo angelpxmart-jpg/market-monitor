@@ -1,0 +1,18 @@
+[
+  {"code": "2330", "ticker": "2330.TW",  "name": "台積電",    "industry": "AI/半導體",       "target": "2150~2300"},
+  {"code": "2454", "ticker": "2454.TW",  "name": "聯發科",    "industry": "AI/半導體",       "target": "3100~3400"},
+  {"code": "3711", "ticker": "3711.TW",  "name": "日月光投控","industry": "AI/半導體",       "target": "500~560"},
+  {"code": "5274", "ticker": "5274.TWO", "name": "信驊",      "industry": "AI/半導體",       "target": "13500~15000"},
+  {"code": "6533", "ticker": "6533.TW",  "name": "矽力-KY",   "industry": "AI/半導體",       "target": "205~225"},
+  {"code": "2382", "ticker": "2382.TW",  "name": "廣達",      "industry": "伺服器/散熱/電源","target": "300~325"},
+  {"code": "6669", "ticker": "6669.TW",  "name": "緯穎",      "industry": "伺服器/散熱/電源","target": "4800~5500"},
+  {"code": "6230", "ticker": "6230.TW",  "name": "超眾",      "industry": "伺服器/散熱/電源","target": "100~112"},
+  {"code": "3324", "ticker": "3324.TWO", "name": "双鴻",      "industry": "伺服器/散熱/電源","target": "950~1050"},
+  {"code": "2308", "ticker": "2308.TW",  "name": "台達電",    "industry": "伺服器/散熱/電源","target": "1700~1850"},
+  {"code": "3008", "ticker": "3008.TW",  "name": "大立光",    "industry": "蘋果供應鏈",      "target": "4300~4800"},
+  {"code": "4938", "ticker": "4938.TW",  "name": "和碩",      "industry": "蘋果供應鏈",      "target": "78~88"},
+  {"code": "2474", "ticker": "2474.TW",  "name": "可成",      "industry": "蘋果供應鏈",      "target": "185~200"},
+  {"code": "2354", "ticker": "2354.TW",  "name": "鴻準",      "industry": "蘋果供應鏈",      "target": "53~60"},
+  {"code": "2345", "ticker": "2345.TW",  "name": "智邦",      "industry": "網通",            "target": "1850~2000"},
+  {"code": "5388", "ticker": "5388.TW",  "name": "中磊",      "industry": "網通",            "target": "70~78"}
+]
