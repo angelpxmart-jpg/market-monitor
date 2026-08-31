@@ -180,6 +180,7 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23f8f3ec'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%238b6435' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%238b6435'/%3E%3C/svg%3E">
 <title>美股下殺台股觀察</title>
 <style>
   :root {{
