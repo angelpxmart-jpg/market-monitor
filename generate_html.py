@@ -28,11 +28,30 @@ def fetch_stock_data(ticker: str) -> dict:
                            progress=False, auto_adjust=True)
         if hist.empty or len(hist) < 2:
             return {}
-        close = hist["Close"].squeeze().dropna()
+        close  = hist["Close"].squeeze().dropna()
+        volume = hist["Volume"].squeeze().dropna()
         price = round(float(close.iat[-1]), 1)
         ma60  = round(float(close.tail(60).mean()), 1) if len(close) >= 60 else None
         ma120 = round(float(close.tail(120).mean()), 1) if len(close) >= 120 else None
-        return {"price": price, "ma60": ma60, "ma120": ma120}
+
+        # MA120 斜率：比較今日 MA120 vs 5 個交易日前的 MA120
+        slope = "—"
+        if ma120 and len(close) >= 125:
+            ma120_5d = float(close.iloc[-125:-5].mean())
+            diff_pct = (ma120 - ma120_5d) / ma120_5d * 100
+            slope = "↑" if diff_pct > 0.1 else ("↓" if diff_pct < -0.1 else "→")
+        elif ma120:
+            slope = "→"
+
+        # 量能條件：今日成交量 ≥ 近 20 日均量 × 0.8
+        vol_ok = None
+        if len(volume) >= 20:
+            today_vol = float(volume.iat[-1])
+            avg_vol20 = float(volume.tail(20).mean())
+            vol_ok = today_vol >= avg_vol20 * 0.8
+
+        return {"price": price, "ma60": ma60, "ma120": ma120,
+                "slope": slope, "vol_ok": vol_ok}
     except Exception as e:
         print(f"  [{ticker}] 抓取失敗：{e}")
         return {}
@@ -88,6 +107,24 @@ def fmt(val, suffix="") -> str:
     return f"{val:,.1f}{suffix}"
 
 
+def slope_html(slope: str) -> str:
+    if slope == "↑":
+        return '<span class="slope-up">↑</span>'
+    elif slope == "↓":
+        return '<span class="slope-down">↓</span>'
+    elif slope == "→":
+        return '<span class="slope-flat">→</span>'
+    return '<span class="slope-flat">—</span>'
+
+
+def vol_html(vol_ok) -> str:
+    if vol_ok is True:
+        return '<span class="vol-ok">✓ 量足</span>'
+    elif vol_ok is False:
+        return '<span class="vol-low">✗ 量不足</span>'
+    return '<span class="vol-na">—</span>'
+
+
 def build_stock_rows(stocks_data: list) -> str:
     rows = []
     for s in stocks_data:
@@ -95,6 +132,8 @@ def build_stock_rows(stocks_data: list) -> str:
         price  = d.get("price")
         ma60   = d.get("ma60")
         ma120  = d.get("ma120")
+        slope  = d.get("slope", "—")
+        vol_ok = d.get("vol_ok")
         target = s.get("target", "")
         low, high = parse_target(target)
 
@@ -109,6 +148,8 @@ def build_stock_rows(stocks_data: list) -> str:
           <td>{fmt(price)}</td>
           <td>{fmt(ma60)}</td>
           <td>{fmt(ma120)}</td>
+          <td style="text-align:center">{slope_html(slope)}</td>
+          <td style="text-align:center">{vol_html(vol_ok)}</td>
           <td class="target-cell">{target if target else '<span class="na">N/A</span>'}</td>
           <td class="dist-cell">{dist}</td>
         </tr>""")
@@ -140,6 +181,7 @@ def build_industry_sections(stocks_data: list) -> str:
         <tr>
           <th>代號</th><th>名稱</th><th>現價</th>
           <th>MA60</th><th>MA120</th>
+          <th>趨勢</th><th>量能</th>
           <th>觀察目標區</th><th>距目標區</th>
         </tr>
       </thead>
@@ -282,6 +324,12 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
   }}
   .dist-cell {{ font-size: 13px; }}
   .target-cell {{ font-size: 13px; color: var(--muted); }}
+  .slope-up   {{ color: var(--green); font-weight: 700; }}
+  .slope-flat {{ color: var(--muted); }}
+  .slope-down {{ color: var(--red);   font-weight: 700; }}
+  .vol-ok  {{ color: var(--green); font-size: 12px; }}
+  .vol-low {{ color: var(--red);   font-size: 12px; }}
+  .vol-na  {{ color: var(--muted); font-size: 12px; font-style: italic; }}
 
   /* ── 事件日誌卡 ── */
   .log-card {{
@@ -292,7 +340,7 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
     box-shadow: 0 1px 3px rgba(15,23,42,.05);
   }}
 
-  /* ── 選股標準 ── */
+  /* ── 選股標準 v2 ── */
   .criteria-card {{
     background: var(--card);
     border: 1px solid var(--border);
@@ -300,23 +348,47 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
     padding: 14px 18px;
     margin-bottom: 14px;
     box-shadow: 0 1px 3px rgba(15,23,42,.05);
-    display: flex; flex-wrap: wrap; gap: 8px 20px;
-    align-items: center;
   }}
-  .criteria-item {{
-    font-size: 12px; color: var(--muted);
-    display: flex; align-items: center; gap: 5px;
+  .criteria-layer {{
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
   }}
-  .criteria-item::before {{
-    content: "✓";
-    color: var(--accent); font-weight: 700;
+  .criteria-layer:last-child {{ border-bottom: none; }}
+  .criteria-layer-label {{
+    min-width: 110px; font-weight: 700;
+    color: var(--accent); flex-shrink: 0; font-size: 11px;
+    text-transform: uppercase; letter-spacing: .4px;
   }}
-  .criteria-formula {{
-    font-size: 12px; color: var(--muted);
-    margin-top: 4px; width: 100%;
-    border-top: 1px solid var(--border);
-    padding-top: 8px;
+  .criteria-layer-items {{
+    color: var(--muted); flex: 1;
+    display: flex; flex-wrap: wrap; gap: 4px 12px;
   }}
+  .ci {{ display: flex; align-items: center; gap: 4px; white-space: nowrap; }}
+  .ci::before {{ content: "·"; color: var(--accent); font-weight: 700; }}
+  .ci-m5 {{ opacity: .65; font-style: italic; }}
+  .ci-m5::before {{ content: "·"; color: var(--muted); }}
+
+  /* ── 出場規則 ── */
+  .exit-card {{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(15,23,42,.05);
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }}
+  .exit-item {{ display: flex; align-items: center; gap: 8px; font-size: 13px; }}
+  .exit-badge {{
+    font-size: 11px; font-weight: 700;
+    padding: 2px 7px; border-radius: 4px;
+    white-space: nowrap;
+  }}
+  .exit-badge.stop-loss  {{ background: rgba(220,38,38,.1);  color: var(--red); }}
+  .exit-badge.take-profit {{ background: rgba(21,128,61,.1);  color: var(--green); }}
+  .exit-rule {{ color: var(--muted); font-size: 12px; }}
 
   .updated {{
     color: var(--muted); font-size: 12px;
@@ -335,13 +407,52 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
 <h1>美股下殺台股觀察</h1>
 <p class="subtitle">SOX 跌幅 ≥ 2% 時自動記錄，追蹤體質健康的台股連動情況</p>
 
-<p class="section-title">選股標準</p>
+<p class="section-title">選股 SOP</p>
 <div class="criteria-card">
-  <span class="criteria-item">TWSE / OTC 上市</span>
-  <span class="criteria-item">主要營收曝險 AI / 蘋果 / 網通供應鏈</span>
-  <span class="criteria-item">近 2 年持續獲利，外資持股 &gt; 20%</span>
-  <span class="criteria-item">市值 ≥ 100 億</span>
-  <div class="criteria-formula">目標區 = MA120 × 0.85 ～ 0.95（15% 超賣為下限，5% 折價為上限）</div>
+  <div class="criteria-layer">
+    <span class="criteria-layer-label">市場 &amp; 流動性</span>
+    <span class="criteria-layer-items">
+      <span class="ci">TWSE / OTC 上市</span>
+      <span class="ci">市值 ≥ 100 億</span>
+    </span>
+  </div>
+  <div class="criteria-layer">
+    <span class="criteria-layer-label">產業曝險</span>
+    <span class="criteria-layer-items">
+      <span class="ci">主要營收 AI / 蘋果 / 網通 ≥ 40%</span>
+      <span class="ci">同產業持股上限 4 支</span>
+    </span>
+  </div>
+  <div class="criteria-layer">
+    <span class="criteria-layer-label">基本面（M5）</span>
+    <span class="criteria-layer-items">
+      <span class="ci ci-m5">EPS 連續 YoY 成長</span>
+      <span class="ci ci-m5">毛利率未較前年同期 -3ppt</span>
+      <span class="ci ci-m5">外資持股 &gt; 20%</span>
+      <span class="ci ci-m5">D/E &lt; 1 或流動比 &gt; 1.5</span>
+      <span class="ci ci-m5">P/E ≤ 同業均值 × 1.5</span>
+    </span>
+  </div>
+  <div class="criteria-layer">
+    <span class="criteria-layer-label">技術進場</span>
+    <span class="criteria-layer-items">
+      <span class="ci">MA120 斜率向上（↑）</span>
+      <span class="ci">股價在 MA120 × 0.85 ～ 0.95</span>
+      <span class="ci">量 ≥ 近 20MA × 0.8</span>
+    </span>
+  </div>
+</div>
+
+<p class="section-title">出場規則</p>
+<div class="exit-card">
+  <div class="exit-item">
+    <span class="exit-badge stop-loss">停損</span>
+    <span class="exit-rule">收盤跌破 MA120 × 0.80 → 出場</span>
+  </div>
+  <div class="exit-item">
+    <span class="exit-badge take-profit">停利</span>
+    <span class="exit-rule">股價站上 MA120 × 1.20 → 分批減碼</span>
+  </div>
 </div>
 
 <p class="section-title">觀察名單</p>
