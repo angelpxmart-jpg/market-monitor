@@ -14,6 +14,13 @@ CONFIG_FILE = os.path.join(BASE_DIR, "stocks_config.json")
 LOG_FILE    = os.path.join(BASE_DIR, "event_log.json")
 OUTPUT_FILE = os.path.join(BASE_DIR, "index.html")
 
+INDUSTRY_COLORS = {
+    "AI/半導體":        "#6366f1",
+    "伺服器/散熱/電源": "#0ea5e9",
+    "蘋果供應鏈":       "#10b981",
+    "網通":             "#f59e0b",
+}
+
 
 def fetch_stock_data(ticker: str) -> dict:
     try:
@@ -55,7 +62,7 @@ def calc_distance(price: float, low: float, high: float) -> str:
 
 
 def row_status(price: float, low, high) -> str:
-    """回傳 CSS class：green / yellow / ''"""
+    """回傳 CSS class：in-zone / near-zone / ''"""
     if low is None:
         return ""
     if low <= price <= high:
@@ -108,6 +115,41 @@ def build_stock_rows(stocks_data: list) -> str:
     return "\n".join(rows)
 
 
+def build_industry_sections(stocks_data: list) -> str:
+    industries: dict = {}
+    for s in stocks_data:
+        ind = s.get("industry", "其他")
+        if ind not in industries:
+            industries[ind] = []
+        industries[ind].append(s)
+
+    sections = []
+    for ind, stocks in industries.items():
+        rows  = build_stock_rows(stocks)
+        color = INDUSTRY_COLORS.get(ind, "#94a3b8")
+        sections.append(f"""
+<section class="industry-section">
+  <div class="industry-header">
+    <span class="industry-dot" style="background:{color}"></span>
+    <span class="industry-name">{ind}</span>
+    <span class="industry-count">{len(stocks)} 檔</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>代號</th><th>名稱</th><th>現價</th>
+          <th>MA60</th><th>MA120</th>
+          <th>觀察目標區</th><th>距目標區</th>
+        </tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
+  </div>
+</section>""")
+    return "\n".join(sections)
+
+
 def build_event_rows(events: list) -> str:
     if not events:
         return '<tr><td colspan="5" class="empty-log">目前無觸發記錄</td></tr>'
@@ -131,8 +173,8 @@ def build_event_rows(events: list) -> str:
 
 
 def build_html(stocks_data: list, events: list, generated_at: str) -> str:
-    stock_rows = build_stock_rows(stocks_data)
-    event_rows = build_event_rows(events)
+    industry_sections = build_industry_sections(stocks_data)
+    event_rows        = build_event_rows(events)
     return f"""<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -141,15 +183,16 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
 <title>美股下殺台股觀察</title>
 <style>
   :root {{
-    --bg: #0f1117;
-    --card: #1a1d26;
-    --border: #2d3148;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --green: #22c55e;
-    --yellow: #eab308;
-    --red: #ef4444;
-    --accent: #6366f1;
+    --bg:        #fdfcf9;
+    --card:      #ffffff;
+    --header-bg: #f8f3ec;
+    --border:    #ede8df;
+    --text:      #2c231a;
+    --muted:     #9e8f7e;
+    --green:     #15803d;
+    --amber:     #b45309;
+    --red:       #dc2626;
+    --accent:    #8b6435;
   }}
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{
@@ -157,48 +200,105 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
     color: var(--text);
     font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
     font-size: 14px;
-    padding: 16px;
-    max-width: 900px;
+    padding: 20px 16px;
+    max-width: 960px;
     margin: 0 auto;
   }}
-  h1 {{ font-size: 20px; font-weight: 700; margin-bottom: 4px; }}
-  .subtitle {{ color: var(--muted); font-size: 13px; margin-bottom: 20px; }}
-  h2 {{ font-size: 15px; font-weight: 600; color: var(--accent);
-        margin: 24px 0 10px; letter-spacing: .5px; }}
+  h1 {{
+    font-size: 22px; font-weight: 700;
+    color: var(--text); margin-bottom: 4px;
+  }}
+  .subtitle {{
+    color: var(--muted); font-size: 13px; margin-bottom: 28px;
+  }}
+  .section-title {{
+    font-size: 11px; font-weight: 700;
+    color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1px; margin: 28px 0 12px;
+  }}
+
+  /* ── 產業卡片 ── */
+  .industry-section {{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15,23,42,.05);
+  }}
+  .industry-header {{
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
+  }}
+  .industry-dot {{
+    width: 8px; height: 8px;
+    border-radius: 50%; flex-shrink: 0;
+  }}
+  .industry-name {{
+    font-size: 13px; font-weight: 700;
+    color: var(--text); letter-spacing: .2px;
+  }}
+  .industry-count {{
+    font-size: 12px; color: var(--muted); margin-left: auto;
+  }}
+  .table-wrap {{ overflow-x: auto; }}
+
+  /* ── 表格通用 ── */
   table {{ width: 100%; border-collapse: collapse; }}
   th {{
-    background: var(--card);
     color: var(--muted);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    padding: 8px 10px;
-    text-align: right;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .6px;
+    padding: 8px 12px; text-align: right;
     border-bottom: 1px solid var(--border);
+    white-space: nowrap; background: transparent;
   }}
   th:first-child, th:nth-child(2) {{ text-align: left; }}
   td {{
-    padding: 9px 10px;
+    padding: 9px 12px;
     border-bottom: 1px solid var(--border);
-    text-align: right;
+    text-align: right; white-space: nowrap;
   }}
   td:first-child, td:nth-child(2) {{ text-align: left; }}
   tr:last-child td {{ border-bottom: none; }}
-  tr.in-zone td {{ background: rgba(34,197,94,.08); }}
+  tr:hover td {{ background: #faf6f0; }}
+  tr.in-zone td {{ background: rgba(22,163,74,.07); }}
   tr.in-zone td:first-child {{ border-left: 3px solid var(--green); }}
-  tr.near-zone td {{ background: rgba(234,179,8,.06); }}
-  tr.near-zone td:first-child {{ border-left: 3px solid var(--yellow); }}
-  .code {{ font-family: monospace; color: var(--accent); font-weight: 600; }}
+  tr.near-zone td {{ background: rgba(180,83,9,.06); }}
+  tr.near-zone td:first-child {{ border-left: 3px solid var(--amber); }}
+
+  .code {{
+    font-family: 'SF Mono', 'Menlo', monospace;
+    color: var(--accent); font-weight: 700; font-size: 13px;
+  }}
   .na {{ color: var(--muted); font-style: italic; }}
-  .neg {{ color: var(--red); }}
-  .empty-log {{ text-align: center; color: var(--muted); padding: 20px; font-style: italic; }}
+  .neg {{ color: var(--red); font-weight: 600; }}
+  .empty-log {{
+    text-align: center; color: var(--muted);
+    padding: 24px; font-style: italic;
+  }}
   .dist-cell {{ font-size: 13px; }}
-  .target-cell {{ font-size: 13px; }}
-  .updated {{ color: var(--muted); font-size: 12px; margin-top: 28px; text-align: right; }}
+  .target-cell {{ font-size: 13px; color: var(--muted); }}
+
+  /* ── 事件日誌卡 ── */
+  .log-card {{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15,23,42,.05);
+  }}
+
+  .updated {{
+    color: var(--muted); font-size: 12px;
+    margin-top: 24px; text-align: right;
+  }}
+
   @media (max-width: 600px) {{
     body {{ font-size: 13px; padding: 12px; }}
-    td, th {{ padding: 7px 6px; }}
+    td, th {{ padding: 7px 8px; }}
     .dist-cell, .target-cell {{ font-size: 12px; }}
   }}
 </style>
@@ -208,39 +308,28 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
 <h1>美股下殺台股觀察</h1>
 <p class="subtitle">SOX 跌幅 ≥ 2% 時自動記錄，追蹤體質健康的台股連動情況</p>
 
-<h2>▸ 觀察名單</h2>
-<table>
-  <thead>
-    <tr>
-      <th>代號</th>
-      <th>名稱</th>
-      <th>現價</th>
-      <th>MA60</th>
-      <th>MA120</th>
-      <th>觀察目標區</th>
-      <th>距目標區</th>
-    </tr>
-  </thead>
-  <tbody>
-    {stock_rows}
-  </tbody>
-</table>
+<p class="section-title">觀察名單</p>
+{industry_sections}
 
-<h2>▸ 下殺事件日誌</h2>
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">日期</th>
-      <th style="text-align:left">SOX 跌幅</th>
-      <th style="text-align:left">美股指數</th>
-      <th>台股平均跌幅</th>
-      <th>跌最多</th>
-    </tr>
-  </thead>
-  <tbody>
-    {event_rows}
-  </tbody>
-</table>
+<p class="section-title">下殺事件日誌</p>
+<div class="log-card">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align:left">日期</th>
+          <th style="text-align:left">SOX 跌幅</th>
+          <th style="text-align:left">美股指數</th>
+          <th>台股平均跌幅</th>
+          <th>跌最多</th>
+        </tr>
+      </thead>
+      <tbody>
+        {event_rows}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <p class="updated">最後更新：{generated_at}</p>
 
