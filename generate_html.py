@@ -292,6 +292,32 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
     box-shadow: 0 1px 3px rgba(15,23,42,.05);
   }}
 
+  /* ── 選股標準 ── */
+  .criteria-card {{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(15,23,42,.05);
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    align-items: center;
+  }}
+  .criteria-item {{
+    font-size: 12px; color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }}
+  .criteria-item::before {{
+    content: "✓";
+    color: var(--accent); font-weight: 700;
+  }}
+  .criteria-formula {{
+    font-size: 12px; color: var(--muted);
+    margin-top: 4px; width: 100%;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }}
+
   .updated {{
     color: var(--muted); font-size: 12px;
     margin-top: 24px; text-align: right;
@@ -308,6 +334,15 @@ def build_html(stocks_data: list, events: list, generated_at: str) -> str:
 
 <h1>美股下殺台股觀察</h1>
 <p class="subtitle">SOX 跌幅 ≥ 2% 時自動記錄，追蹤體質健康的台股連動情況</p>
+
+<p class="section-title">選股標準</p>
+<div class="criteria-card">
+  <span class="criteria-item">TWSE / OTC 上市</span>
+  <span class="criteria-item">主要營收曝險 AI / 蘋果 / 網通供應鏈</span>
+  <span class="criteria-item">近 2 年持續獲利，外資持股 &gt; 20%</span>
+  <span class="criteria-item">市值 ≥ 100 億</span>
+  <div class="criteria-formula">目標區 = MA120 × 0.85 ～ 0.95（15% 超賣為下限，5% 折價為上限）</div>
+</div>
 
 <p class="section-title">觀察名單</p>
 {industry_sections}

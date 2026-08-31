@@ -115,6 +115,32 @@
     box-shadow: 0 1px 3px rgba(15,23,42,.05);
   }
 
+  /* ── 選股標準 ── */
+  .criteria-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(15,23,42,.05);
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    align-items: center;
+  }
+  .criteria-item {
+    font-size: 12px; color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .criteria-item::before {
+    content: "✓";
+    color: var(--accent); font-weight: 700;
+  }
+  .criteria-formula {
+    font-size: 12px; color: var(--muted);
+    margin-top: 4px; width: 100%;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }
+
   .updated {
     color: var(--muted); font-size: 12px;
     margin-top: 24px; text-align: right;
@@ -132,13 +158,22 @@
 <h1>美股下殺台股觀察</h1>
 <p class="subtitle">SOX 跌幅 ≥ 2% 時自動記錄，追蹤體質健康的台股連動情況</p>
 
+<p class="section-title">選股標準</p>
+<div class="criteria-card">
+  <span class="criteria-item">TWSE / OTC 上市</span>
+  <span class="criteria-item">主要營收曝險 AI / 蘋果 / 網通供應鏈</span>
+  <span class="criteria-item">近 2 年持續獲利，外資持股 &gt; 20%</span>
+  <span class="criteria-item">市值 ≥ 100 億</span>
+  <div class="criteria-formula">目標區 = MA120 × 0.85 ～ 0.95（15% 超賣為下限，5% 折價為上限）</div>
+</div>
+
 <p class="section-title">觀察名單</p>
 
 <section class="industry-section">
   <div class="industry-header">
     <span class="industry-dot" style="background:#6366f1"></span>
     <span class="industry-name">AI/半導體</span>
-    <span class="industry-count">5 檔</span>
+    <span class="industry-count">10 檔</span>
   </div>
   <div class="table-wrap">
     <table>
@@ -156,8 +191,8 @@
           <td>2,405.0</td>
           <td>2,384.5</td>
           <td>2,236.7</td>
-          <td class="target-cell">2150~2300</td>
-          <td class="dist-cell">-4.6%（偏高）</td>
+          <td class="target-cell">1901~2125</td>
+          <td class="dist-cell">-13.2%（偏高）</td>
         </tr>
 
         <tr>
@@ -166,8 +201,8 @@
           <td>3,925.0</td>
           <td>3,951.2</td>
           <td>3,299.2</td>
-          <td class="target-cell">3100~3400</td>
-          <td class="dist-cell">-15.4%（偏高）</td>
+          <td class="target-cell">2804~3134</td>
+          <td class="dist-cell">-25.2%（偏高）</td>
         </tr>
 
         <tr>
@@ -176,8 +211,8 @@
           <td>584.0</td>
           <td>614.6</td>
           <td>537.5</td>
-          <td class="target-cell">500~560</td>
-          <td class="dist-cell">-4.3%（偏高）</td>
+          <td class="target-cell">457~511</td>
+          <td class="dist-cell">-14.3%（偏高）</td>
         </tr>
 
         <tr>
@@ -186,8 +221,8 @@
           <td>16,065.0</td>
           <td>15,379.0</td>
           <td>14,400.4</td>
-          <td class="target-cell">13500~15000</td>
-          <td class="dist-cell">-7.1%（偏高）</td>
+          <td class="target-cell">12240~13680</td>
+          <td class="dist-cell">-17.4%（偏高）</td>
         </tr>
 
         <tr>
@@ -196,8 +231,58 @@
           <td>261.0</td>
           <td>221.3</td>
           <td>217.6</td>
-          <td class="target-cell">205~225</td>
-          <td class="dist-cell">-16.0%（偏高）</td>
+          <td class="target-cell">185~207</td>
+          <td class="dist-cell">-26.1%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2303</span></td>
+          <td>聯電</td>
+          <td>129.0</td>
+          <td>136.4</td>
+          <td>110.1</td>
+          <td class="target-cell">94~105</td>
+          <td class="dist-cell">-22.9%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2379</span></td>
+          <td>瑞昱</td>
+          <td>721.0</td>
+          <td>743.2</td>
+          <td>640.6</td>
+          <td class="target-cell">545~609</td>
+          <td class="dist-cell">-18.4%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">6488</span></td>
+          <td>環球晶</td>
+          <td>912.0</td>
+          <td>1,041.0</td>
+          <td>828.0</td>
+          <td class="target-cell">704~787</td>
+          <td class="dist-cell">-15.9%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2408</span></td>
+          <td>南亞科</td>
+          <td>543.0</td>
+          <td>442.1</td>
+          <td>352.4</td>
+          <td class="target-cell">300~335</td>
+          <td class="dist-cell">-62.1%（偏高）</td>
+        </tr>
+
+        <tr class="in-zone">
+          <td><span class="code">4966</span></td>
+          <td>譜瑞-KY</td>
+          <td>578.0</td>
+          <td>607.8</td>
+          <td>609.4</td>
+          <td class="target-cell">518~579</td>
+          <td class="dist-cell">✅ 在目標區</td>
         </tr></tbody>
     </table>
   </div>
@@ -207,7 +292,7 @@
   <div class="industry-header">
     <span class="industry-dot" style="background:#0ea5e9"></span>
     <span class="industry-name">伺服器/散熱/電源</span>
-    <span class="industry-count">5 檔</span>
+    <span class="industry-count">10 檔</span>
   </div>
   <div class="table-wrap">
     <table>
@@ -225,8 +310,8 @@
           <td>338.5</td>
           <td>337.1</td>
           <td>320.7</td>
-          <td class="target-cell">300~325</td>
-          <td class="dist-cell">-4.2%（偏高）</td>
+          <td class="target-cell">273~305</td>
+          <td class="dist-cell">-11.0%（偏高）</td>
         </tr>
 
         <tr>
@@ -235,18 +320,18 @@
           <td>7,095.0</td>
           <td>5,471.2</td>
           <td>4,910.2</td>
-          <td class="target-cell">4800~5500</td>
-          <td class="dist-cell">-29.0%（偏高）</td>
+          <td class="target-cell">4174~4665</td>
+          <td class="dist-cell">-52.1%（偏高）</td>
         </tr>
 
-        <tr class="in-zone">
+        <tr class="near-zone">
           <td><span class="code">6230</span></td>
           <td>超眾</td>
           <td>108.0</td>
           <td>118.3</td>
           <td>135.0</td>
-          <td class="target-cell">100~112</td>
-          <td class="dist-cell">✅ 在目標區</td>
+          <td class="target-cell">115~128</td>
+          <td class="dist-cell">+6.1%（尚早）</td>
         </tr>
 
         <tr>
@@ -255,18 +340,68 @@
           <td>1,250.0</td>
           <td>989.9</td>
           <td>1,012.9</td>
-          <td class="target-cell">950~1050</td>
-          <td class="dist-cell">-19.0%（偏高）</td>
+          <td class="target-cell">861~962</td>
+          <td class="dist-cell">-29.9%（偏高）</td>
         </tr>
 
-        <tr class="in-zone">
+        <tr>
           <td><span class="code">2308</span></td>
           <td>台達電</td>
           <td>1,840.0</td>
           <td>1,877.9</td>
           <td>1,886.8</td>
-          <td class="target-cell">1700~1850</td>
-          <td class="dist-cell">✅ 在目標區</td>
+          <td class="target-cell">1604~1792</td>
+          <td class="dist-cell">-2.7%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3017</span></td>
+          <td>奇鋐</td>
+          <td>3,425.0</td>
+          <td>2,576.1</td>
+          <td>2,479.2</td>
+          <td class="target-cell">2107~2355</td>
+          <td class="dist-cell">-45.4%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2356</span></td>
+          <td>英業達</td>
+          <td>66.7</td>
+          <td>64.3</td>
+          <td>56.6</td>
+          <td class="target-cell">48~54</td>
+          <td class="dist-cell">-23.5%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3231</span></td>
+          <td>緯創</td>
+          <td>178.0</td>
+          <td>165.4</td>
+          <td>150.3</td>
+          <td class="target-cell">128~143</td>
+          <td class="dist-cell">-24.5%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2301</span></td>
+          <td>光寶科</td>
+          <td>305.0</td>
+          <td>231.6</td>
+          <td>206.6</td>
+          <td class="target-cell">176~196</td>
+          <td class="dist-cell">-55.6%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2421</span></td>
+          <td>建準</td>
+          <td>179.5</td>
+          <td>142.9</td>
+          <td>142.0</td>
+          <td class="target-cell">121~135</td>
+          <td class="dist-cell">-33.0%（偏高）</td>
         </tr></tbody>
     </table>
   </div>
@@ -276,7 +411,7 @@
   <div class="industry-header">
     <span class="industry-dot" style="background:#10b981"></span>
     <span class="industry-name">蘋果供應鏈</span>
-    <span class="industry-count">4 檔</span>
+    <span class="industry-count">10 檔</span>
   </div>
   <div class="table-wrap">
     <table>
@@ -294,8 +429,8 @@
           <td>7,650.0</td>
           <td>4,581.7</td>
           <td>3,658.1</td>
-          <td class="target-cell">4300~4800</td>
-          <td class="dist-cell">-59.4%（偏高）</td>
+          <td class="target-cell">3109~3475</td>
+          <td class="dist-cell">-120.1%（偏高）</td>
         </tr>
 
         <tr>
@@ -304,8 +439,8 @@
           <td>91.1</td>
           <td>86.1</td>
           <td>82.0</td>
-          <td class="target-cell">78~88</td>
-          <td class="dist-cell">-3.5%（偏高）</td>
+          <td class="target-cell">70~78</td>
+          <td class="dist-cell">-16.8%（偏高）</td>
         </tr>
 
         <tr>
@@ -314,8 +449,8 @@
           <td>208.5</td>
           <td>196.5</td>
           <td>195.4</td>
-          <td class="target-cell">185~200</td>
-          <td class="dist-cell">-4.2%（偏高）</td>
+          <td class="target-cell">166~186</td>
+          <td class="dist-cell">-12.1%（偏高）</td>
         </tr>
 
         <tr>
@@ -324,8 +459,68 @@
           <td>64.7</td>
           <td>57.5</td>
           <td>55.8</td>
-          <td class="target-cell">53~60</td>
-          <td class="dist-cell">-7.8%（偏高）</td>
+          <td class="target-cell">47~53</td>
+          <td class="dist-cell">-22.1%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2317</span></td>
+          <td>鴻海</td>
+          <td>250.0</td>
+          <td>249.3</td>
+          <td>236.1</td>
+          <td class="target-cell">201~224</td>
+          <td class="dist-cell">-11.6%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3034</span></td>
+          <td>聯詠</td>
+          <td>540.0</td>
+          <td>509.1</td>
+          <td>460.4</td>
+          <td class="target-cell">391~437</td>
+          <td class="dist-cell">-23.6%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3037</span></td>
+          <td>欣興</td>
+          <td>999.0</td>
+          <td>950.4</td>
+          <td>844.8</td>
+          <td class="target-cell">718~803</td>
+          <td class="dist-cell">-24.4%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3044</span></td>
+          <td>健鼎</td>
+          <td>496.5</td>
+          <td>455.8</td>
+          <td>438.8</td>
+          <td class="target-cell">373~417</td>
+          <td class="dist-cell">-19.1%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2360</span></td>
+          <td>致茂</td>
+          <td>1,960.0</td>
+          <td>2,088.3</td>
+          <td>2,042.3</td>
+          <td class="target-cell">1736~1940</td>
+          <td class="dist-cell">-1.0%（偏高）</td>
+        </tr>
+
+        <tr class="in-zone">
+          <td><span class="code">2385</span></td>
+          <td>群光</td>
+          <td>106.5</td>
+          <td>108.6</td>
+          <td>114.7</td>
+          <td class="target-cell">97~109</td>
+          <td class="dist-cell">✅ 在目標區</td>
         </tr></tbody>
     </table>
   </div>
@@ -335,7 +530,7 @@
   <div class="industry-header">
     <span class="industry-dot" style="background:#f59e0b"></span>
     <span class="industry-name">網通</span>
-    <span class="industry-count">2 檔</span>
+    <span class="industry-count">10 檔</span>
   </div>
   <div class="table-wrap">
     <table>
@@ -347,14 +542,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="in-zone">
           <td><span class="code">2345</span></td>
           <td>智邦</td>
           <td>2,035.0</td>
           <td>2,290.3</td>
           <td>2,181.0</td>
-          <td class="target-cell">1850~2000</td>
-          <td class="dist-cell">-1.8%（偏高）</td>
+          <td class="target-cell">1854~2072</td>
+          <td class="dist-cell">✅ 在目標區</td>
         </tr>
 
         <tr class="in-zone">
@@ -365,6 +560,86 @@
           <td>82.0</td>
           <td class="target-cell">70~78</td>
           <td class="dist-cell">✅ 在目標區</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">2332</span></td>
+          <td>友訊</td>
+          <td>19.9</td>
+          <td>20.6</td>
+          <td>17.8</td>
+          <td class="target-cell">15~17</td>
+          <td class="dist-cell">-17.1%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">6277</span></td>
+          <td>宏正</td>
+          <td>78.1</td>
+          <td>75.0</td>
+          <td>71.5</td>
+          <td class="target-cell">61~68</td>
+          <td class="dist-cell">-14.9%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">4906</span></td>
+          <td>正文</td>
+          <td>36.2</td>
+          <td>38.1</td>
+          <td>38.0</td>
+          <td class="target-cell">32~36</td>
+          <td class="dist-cell">-0.6%（偏高）</td>
+        </tr>
+
+        <tr class="in-zone">
+          <td><span class="code">3491</span></td>
+          <td>昇銳</td>
+          <td>1,380.0</td>
+          <td>1,319.3</td>
+          <td>1,498.7</td>
+          <td class="target-cell">1274~1424</td>
+          <td class="dist-cell">✅ 在目標區</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">6213</span></td>
+          <td>聯茂</td>
+          <td>548.0</td>
+          <td>368.5</td>
+          <td>297.5</td>
+          <td class="target-cell">253~283</td>
+          <td class="dist-cell">-93.6%（偏高）</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">3706</span></td>
+          <td>神達</td>
+          <td>92.5</td>
+          <td>89.4</td>
+          <td>86.4</td>
+          <td class="target-cell">73~82</td>
+          <td class="dist-cell">-12.8%（偏高）</td>
+        </tr>
+
+        <tr class="in-zone">
+          <td><span class="code">3085</span></td>
+          <td>碩天</td>
+          <td>11.8</td>
+          <td>12.1</td>
+          <td>12.2</td>
+          <td class="target-cell">10~12</td>
+          <td class="dist-cell">✅ 在目標區</td>
+        </tr>
+
+        <tr>
+          <td><span class="code">4977</span></td>
+          <td>眾達-KY</td>
+          <td>175.0</td>
+          <td>152.8</td>
+          <td>179.1</td>
+          <td class="target-cell">152~170</td>
+          <td class="dist-cell">-2.9%（偏高）</td>
         </tr></tbody>
     </table>
   </div>
@@ -390,7 +665,7 @@
   </div>
 </div>
 
-<p class="updated">最後更新：2026/08/31 17:01</p>
+<p class="updated">最後更新：2026/08/31 17:18</p>
 
 </body>
 </html>
