@@ -1,0 +1,2479 @@
+{
+  "updated": "2026-09-01 13:24",
+  "stocks": {
+    "2330": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 45.26
+        },
+        {
+          "year": 2025,
+          "eps": 66.26
+        },
+        {
+          "year": 2026,
+          "eps": 49.33
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 13.95
+        },
+        {
+          "q": "2025Q2",
+          "eps": 15.36
+        },
+        {
+          "q": "2025Q3",
+          "eps": 17.44
+        },
+        {
+          "q": "2025Q4",
+          "eps": 19.51
+        },
+        {
+          "q": "2026Q1",
+          "eps": 22.08
+        },
+        {
+          "q": "2026Q2",
+          "eps": 27.25
+        }
+      ],
+      "gpm_latest": 67.72,
+      "gpm_prev": 58.62,
+      "gpm_delta": 9.1,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.46,
+      "balance_ok": true,
+      "foreign_hold_pct": 69.2,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -1151127,
+        5204332,
+        4500595,
+        3031655,
+        -4554240
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2454": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 66.92
+        },
+        {
+          "year": 2025,
+          "eps": 66.17
+        },
+        {
+          "year": 2026,
+          "eps": 30.45
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 18.43
+        },
+        {
+          "q": "2025Q2",
+          "eps": 17.5
+        },
+        {
+          "q": "2025Q3",
+          "eps": 15.84
+        },
+        {
+          "q": "2025Q4",
+          "eps": 14.4
+        },
+        {
+          "q": "2026Q1",
+          "eps": 15.17
+        },
+        {
+          "q": "2026Q2",
+          "eps": 15.28
+        }
+      ],
+      "gpm_latest": 46.2,
+      "gpm_prev": 49.13,
+      "gpm_delta": -2.93,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.24,
+      "balance_ok": false,
+      "foreign_hold_pct": 55.79,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        415166,
+        1231850,
+        -246728,
+        1096338,
+        -613435
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3711": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 7.53
+        },
+        {
+          "year": 2025,
+          "eps": 9.37
+        },
+        {
+          "year": 2026,
+          "eps": 8.04
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 1.75
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.74
+        },
+        {
+          "q": "2025Q3",
+          "eps": 2.5
+        },
+        {
+          "q": "2025Q4",
+          "eps": 3.38
+        },
+        {
+          "q": "2026Q1",
+          "eps": 3.24
+        },
+        {
+          "q": "2026Q2",
+          "eps": 4.8
+        }
+      ],
+      "gpm_latest": 21.0,
+      "gpm_prev": 17.04,
+      "gpm_delta": 3.96,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.07,
+      "balance_ok": false,
+      "foreign_hold_pct": 76.69,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        342821,
+        939917,
+        1807361,
+        -567164,
+        -8938916
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "5274": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 68.05
+        },
+        {
+          "year": 2025,
+          "eps": 103.92
+        },
+        {
+          "year": 2026,
+          "eps": 81.68
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 23.46
+        },
+        {
+          "q": "2025Q2",
+          "eps": 16.65
+        },
+        {
+          "q": "2025Q3",
+          "eps": 32.12
+        },
+        {
+          "q": "2025Q4",
+          "eps": 31.69
+        },
+        {
+          "q": "2026Q1",
+          "eps": 37.41
+        },
+        {
+          "q": "2026Q2",
+          "eps": 44.27
+        }
+      ],
+      "gpm_latest": 72.0,
+      "gpm_prev": 67.88,
+      "gpm_delta": 4.12,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.02,
+      "balance_ok": true,
+      "foreign_hold_pct": 53.37,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        83281,
+        -6226,
+        12284,
+        75822,
+        107985
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "6533": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 0.04
+        },
+        {
+          "year": 2025,
+          "eps": -8.19
+        },
+        {
+          "year": 2026,
+          "eps": -4.62
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": -2.26
+        },
+        {
+          "q": "2025Q2",
+          "eps": -5.58
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.17
+        },
+        {
+          "q": "2025Q4",
+          "eps": -0.52
+        },
+        {
+          "q": "2026Q1",
+          "eps": -3.28
+        },
+        {
+          "q": "2026Q2",
+          "eps": -1.34
+        }
+      ],
+      "gpm_latest": 99.86,
+      "gpm_prev": 99.88,
+      "gpm_delta": -0.02,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 4.97,
+      "balance_ok": true,
+      "foreign_hold_pct": 10.17,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        249100,
+        -29257,
+        164252,
+        -89679,
+        12000
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2303": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 3.79
+        },
+        {
+          "year": 2025,
+          "eps": 3.33
+        },
+        {
+          "year": 2026,
+          "eps": 4.68
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 0.62
+        },
+        {
+          "q": "2025Q2",
+          "eps": 0.71
+        },
+        {
+          "q": "2025Q3",
+          "eps": 1.2
+        },
+        {
+          "q": "2025Q4",
+          "eps": 0.8
+        },
+        {
+          "q": "2026Q1",
+          "eps": 1.29
+        },
+        {
+          "q": "2026Q2",
+          "eps": 3.39
+        }
+      ],
+      "gpm_latest": 32.48,
+      "gpm_prev": 28.72,
+      "gpm_delta": 3.76,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.17,
+      "balance_ok": true,
+      "foreign_hold_pct": 41.42,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -11797235,
+        -16315046,
+        -31746122,
+        88988696,
+        -12716120
+      ],
+      "foreign_buy_days": 1,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2379": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 29.81
+        },
+        {
+          "year": 2025,
+          "eps": 28.77
+        },
+        {
+          "year": 2026,
+          "eps": 15.86
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 9.28
+        },
+        {
+          "q": "2025Q2",
+          "eps": 7.62
+        },
+        {
+          "q": "2025Q3",
+          "eps": 6.69
+        },
+        {
+          "q": "2025Q4",
+          "eps": 5.18
+        },
+        {
+          "q": "2026Q1",
+          "eps": 8.44
+        },
+        {
+          "q": "2026Q2",
+          "eps": 7.42
+        }
+      ],
+      "gpm_latest": 47.0,
+      "gpm_prev": 50.23,
+      "gpm_delta": -3.23,
+      "gpm_ok": false,
+      "de_ratio": null,
+      "current_ratio": 1.19,
+      "balance_ok": false,
+      "foreign_hold_pct": 44.39,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        447683,
+        155087,
+        -106550,
+        -315011,
+        -78062
+      ],
+      "foreign_buy_days": 2,
+      "pe": null,
+      "segment_warning": false
+    },
+    "6488": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 21.17
+        },
+        {
+          "year": 2025,
+          "eps": 15.3
+        },
+        {
+          "year": 2026,
+          "eps": 11.87
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 3.05
+        },
+        {
+          "q": "2025Q2",
+          "eps": 3.52
+        },
+        {
+          "q": "2025Q3",
+          "eps": 4.12
+        },
+        {
+          "q": "2025Q4",
+          "eps": 4.61
+        },
+        {
+          "q": "2026Q1",
+          "eps": 3.97
+        },
+        {
+          "q": "2026Q2",
+          "eps": 7.9
+        }
+      ],
+      "gpm_latest": 20.64,
+      "gpm_prev": 25.76,
+      "gpm_delta": -5.12,
+      "gpm_ok": false,
+      "de_ratio": null,
+      "current_ratio": 1.28,
+      "balance_ok": false,
+      "foreign_hold_pct": 27.48,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -1674503,
+        -2937839,
+        125597,
+        -1857756,
+        -1531759
+      ],
+      "foreign_buy_days": 1,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2408": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": -1.64
+        },
+        {
+          "year": 2025,
+          "eps": 2.13
+        },
+        {
+          "year": 2026,
+          "eps": 23.07
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": -0.63
+        },
+        {
+          "q": "2025Q2",
+          "eps": -1.32
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.5
+        },
+        {
+          "q": "2025Q4",
+          "eps": 3.58
+        },
+        {
+          "q": "2026Q1",
+          "eps": 8.41
+        },
+        {
+          "q": "2026Q2",
+          "eps": 14.66
+        }
+      ],
+      "gpm_latest": 79.49,
+      "gpm_prev": -20.56,
+      "gpm_delta": 100.05,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 6.91,
+      "balance_ok": true,
+      "foreign_hold_pct": 17.79,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -432870,
+        3157786,
+        30133530,
+        -772623,
+        7647288
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "4966": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 32.57
+        },
+        {
+          "year": 2025,
+          "eps": 34.66
+        },
+        {
+          "year": 2026,
+          "eps": 14.43
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 8.38
+        },
+        {
+          "q": "2025Q2",
+          "eps": 8.95
+        },
+        {
+          "q": "2025Q3",
+          "eps": 10.45
+        },
+        {
+          "q": "2025Q4",
+          "eps": 6.88
+        },
+        {
+          "q": "2026Q1",
+          "eps": 6.77
+        },
+        {
+          "q": "2026Q2",
+          "eps": 7.66
+        }
+      ],
+      "gpm_latest": 40.2,
+      "gpm_prev": 43.11,
+      "gpm_delta": -2.91,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 4.78,
+      "balance_ok": true,
+      "foreign_hold_pct": 39.58,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        93423,
+        329838,
+        14158,
+        -3704,
+        -48452
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2382": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 15.49
+        },
+        {
+          "year": 2025,
+          "eps": 19.44
+        },
+        {
+          "year": 2026,
+          "eps": 12.93
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 5.06
+        },
+        {
+          "q": "2025Q2",
+          "eps": 4.37
+        },
+        {
+          "q": "2025Q3",
+          "eps": 4.26
+        },
+        {
+          "q": "2025Q4",
+          "eps": 5.75
+        },
+        {
+          "q": "2026Q1",
+          "eps": 5.5
+        },
+        {
+          "q": "2026Q2",
+          "eps": 7.43
+        }
+      ],
+      "gpm_latest": 5.02,
+      "gpm_prev": 7.05,
+      "gpm_delta": -2.03,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.13,
+      "balance_ok": false,
+      "foreign_hold_pct": 23.36,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        1388754,
+        2766145,
+        3500349,
+        -669334,
+        2660019
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "6669": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 126.32
+        },
+        {
+          "year": 2025,
+          "eps": 275.06
+        },
+        {
+          "year": 2026,
+          "eps": 156.38
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 52.7
+        },
+        {
+          "q": "2025Q2",
+          "eps": 65.23
+        },
+        {
+          "q": "2025Q3",
+          "eps": 82.92
+        },
+        {
+          "q": "2025Q4",
+          "eps": 74.21
+        },
+        {
+          "q": "2026Q1",
+          "eps": 75.95
+        },
+        {
+          "q": "2026Q2",
+          "eps": 80.43
+        }
+      ],
+      "gpm_latest": 9.26,
+      "gpm_prev": 8.58,
+      "gpm_delta": 0.68,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.32,
+      "balance_ok": false,
+      "foreign_hold_pct": 27.21,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        26632,
+        -459725,
+        -304062,
+        2303,
+        -336977
+      ],
+      "foreign_buy_days": 2,
+      "pe": null,
+      "segment_warning": false
+    },
+    "6230": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 1.48
+        },
+        {
+          "year": 2025,
+          "eps": -2.44
+        },
+        {
+          "year": 2026,
+          "eps": -1.82
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": -0.77
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.57
+        },
+        {
+          "q": "2025Q3",
+          "eps": -2.1
+        },
+        {
+          "q": "2025Q4",
+          "eps": -1.14
+        },
+        {
+          "q": "2026Q1",
+          "eps": -0.91
+        },
+        {
+          "q": "2026Q2",
+          "eps": -0.91
+        }
+      ],
+      "gpm_latest": 16.94,
+      "gpm_prev": 16.98,
+      "gpm_delta": -0.04,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.15,
+      "balance_ok": true,
+      "foreign_hold_pct": 87.09,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        60,
+        21000,
+        28000,
+        2041,
+        1000
+      ],
+      "foreign_buy_days": 5,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3324": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 21.36
+        },
+        {
+          "year": 2025,
+          "eps": 28.2
+        },
+        {
+          "year": 2026,
+          "eps": 23.02
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 5.66
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.75
+        },
+        {
+          "q": "2025Q3",
+          "eps": 10.66
+        },
+        {
+          "q": "2025Q4",
+          "eps": 10.13
+        },
+        {
+          "q": "2026Q1",
+          "eps": 12.61
+        },
+        {
+          "q": "2026Q2",
+          "eps": 10.41
+        }
+      ],
+      "gpm_latest": 28.42,
+      "gpm_prev": 26.13,
+      "gpm_delta": 2.29,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.84,
+      "balance_ok": true,
+      "foreign_hold_pct": 37.35,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        823265,
+        -397696,
+        741253,
+        1596703,
+        2451839
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2308": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 13.56
+        },
+        {
+          "year": 2025,
+          "eps": 23.14
+        },
+        {
+          "year": 2026,
+          "eps": 17.59
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 3.94
+        },
+        {
+          "q": "2025Q2",
+          "eps": 5.37
+        },
+        {
+          "q": "2025Q3",
+          "eps": 7.16
+        },
+        {
+          "q": "2025Q4",
+          "eps": 6.67
+        },
+        {
+          "q": "2026Q1",
+          "eps": 7.91
+        },
+        {
+          "q": "2026Q2",
+          "eps": 9.68
+        }
+      ],
+      "gpm_latest": 35.64,
+      "gpm_prev": 35.51,
+      "gpm_delta": 0.13,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.6,
+      "balance_ok": true,
+      "foreign_hold_pct": 62.06,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -1875313,
+        605855,
+        716238,
+        1163858,
+        271930
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": true
+    },
+    "3017": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 21.21
+        },
+        {
+          "year": 2025,
+          "eps": 49.17
+        },
+        {
+          "year": 2026,
+          "eps": 44.54
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 8.28
+        },
+        {
+          "q": "2025Q2",
+          "eps": 10.3
+        },
+        {
+          "q": "2025Q3",
+          "eps": 13.67
+        },
+        {
+          "q": "2025Q4",
+          "eps": 16.92
+        },
+        {
+          "q": "2026Q1",
+          "eps": 20.17
+        },
+        {
+          "q": "2026Q2",
+          "eps": 24.37
+        }
+      ],
+      "gpm_latest": 32.57,
+      "gpm_prev": 24.41,
+      "gpm_delta": 8.16,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.26,
+      "balance_ok": false,
+      "foreign_hold_pct": 54.08,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        88378,
+        -622069,
+        -383807,
+        -33669,
+        494312
+      ],
+      "foreign_buy_days": 2,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2356": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 2.02
+        },
+        {
+          "year": 2025,
+          "eps": 2.41
+        },
+        {
+          "year": 2026,
+          "eps": 1.77
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 0.47
+        },
+        {
+          "q": "2025Q2",
+          "eps": 0.61
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.76
+        },
+        {
+          "q": "2025Q4",
+          "eps": 0.57
+        },
+        {
+          "q": "2026Q1",
+          "eps": 0.68
+        },
+        {
+          "q": "2026Q2",
+          "eps": 1.09
+        }
+      ],
+      "gpm_latest": 4.23,
+      "gpm_prev": 5.09,
+      "gpm_delta": -0.86,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.08,
+      "balance_ok": false,
+      "foreign_hold_pct": 18.92,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -1702675,
+        6686996,
+        -4976529,
+        -3437277,
+        5121318
+      ],
+      "foreign_buy_days": 2,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3231": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 6.11
+        },
+        {
+          "year": 2025,
+          "eps": 9.02
+        },
+        {
+          "year": 2026,
+          "eps": 7.78
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 1.85
+        },
+        {
+          "q": "2025Q2",
+          "eps": 2.2
+        },
+        {
+          "q": "2025Q3",
+          "eps": 2.36
+        },
+        {
+          "q": "2025Q4",
+          "eps": 2.61
+        },
+        {
+          "q": "2026Q1",
+          "eps": 3.06
+        },
+        {
+          "q": "2026Q2",
+          "eps": 4.72
+        }
+      ],
+      "gpm_latest": 5.66,
+      "gpm_prev": 4.44,
+      "gpm_delta": 1.22,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.18,
+      "balance_ok": false,
+      "foreign_hold_pct": 33.45,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -9585546,
+        3413867,
+        -6687521,
+        -8245861,
+        -4651544
+      ],
+      "foreign_buy_days": 1,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2301": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 5.21
+        },
+        {
+          "year": 2025,
+          "eps": 6.65
+        },
+        {
+          "year": 2026,
+          "eps": 4.8
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 1.51
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.39
+        },
+        {
+          "q": "2025Q3",
+          "eps": 2.05
+        },
+        {
+          "q": "2025Q4",
+          "eps": 1.7
+        },
+        {
+          "q": "2026Q1",
+          "eps": 1.66
+        },
+        {
+          "q": "2026Q2",
+          "eps": 3.14
+        }
+      ],
+      "gpm_latest": 27.22,
+      "gpm_prev": 22.12,
+      "gpm_delta": 5.1,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.39,
+      "balance_ok": false,
+      "foreign_hold_pct": 44.04,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -658104,
+        -1903188,
+        -3239604,
+        4122033,
+        -4476948
+      ],
+      "foreign_buy_days": 1,
+      "pe": null,
+      "segment_warning": true
+    },
+    "2421": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 5.46
+        },
+        {
+          "year": 2025,
+          "eps": 7.94
+        },
+        {
+          "year": 2026,
+          "eps": 4.78
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 1.73
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.37
+        },
+        {
+          "q": "2025Q3",
+          "eps": 2.55
+        },
+        {
+          "q": "2025Q4",
+          "eps": 2.29
+        },
+        {
+          "q": "2026Q1",
+          "eps": 2.36
+        },
+        {
+          "q": "2026Q2",
+          "eps": 2.42
+        }
+      ],
+      "gpm_latest": 31.25,
+      "gpm_prev": 30.53,
+      "gpm_delta": 0.72,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.64,
+      "balance_ok": true,
+      "foreign_hold_pct": 36.9,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -208970,
+        937223,
+        5005486,
+        1618157,
+        9431027
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3008": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 194.17
+        },
+        {
+          "year": 2025,
+          "eps": 159.41
+        },
+        {
+          "year": 2026,
+          "eps": 82.33
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 48.28
+        },
+        {
+          "q": "2025Q2",
+          "eps": 7.73
+        },
+        {
+          "q": "2025Q3",
+          "eps": 53.05
+        },
+        {
+          "q": "2025Q4",
+          "eps": 50.35
+        },
+        {
+          "q": "2026Q1",
+          "eps": 46.63
+        },
+        {
+          "q": "2026Q2",
+          "eps": 35.7
+        }
+      ],
+      "gpm_latest": 49.42,
+      "gpm_prev": 53.63,
+      "gpm_delta": -4.21,
+      "gpm_ok": false,
+      "de_ratio": null,
+      "current_ratio": 4.85,
+      "balance_ok": true,
+      "foreign_hold_pct": 26.82,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        15906,
+        -116464,
+        -141153,
+        563648,
+        -508716
+      ],
+      "foreign_buy_days": 2,
+      "pe": null,
+      "segment_warning": false
+    },
+    "4938": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 6.34
+        },
+        {
+          "year": 2025,
+          "eps": 5.39
+        },
+        {
+          "year": 2026,
+          "eps": 2.26
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 1.62
+        },
+        {
+          "q": "2025Q2",
+          "eps": 0.11
+        },
+        {
+          "q": "2025Q3",
+          "eps": 1.69
+        },
+        {
+          "q": "2025Q4",
+          "eps": 1.97
+        },
+        {
+          "q": "2026Q1",
+          "eps": 0.58
+        },
+        {
+          "q": "2026Q2",
+          "eps": 1.68
+        }
+      ],
+      "gpm_latest": 4.43,
+      "gpm_prev": 3.13,
+      "gpm_delta": 1.3,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.27,
+      "balance_ok": false,
+      "foreign_hold_pct": 31.79,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -1917993,
+        116307,
+        138537,
+        -1545393,
+        3238235
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2474": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 33.28
+        },
+        {
+          "year": 2025,
+          "eps": 11.36
+        },
+        {
+          "year": 2026,
+          "eps": 5.14
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 4.46
+        },
+        {
+          "q": "2025Q2",
+          "eps": -1.6
+        },
+        {
+          "q": "2025Q3",
+          "eps": 4.62
+        },
+        {
+          "q": "2025Q4",
+          "eps": 3.88
+        },
+        {
+          "q": "2026Q1",
+          "eps": 2.63
+        },
+        {
+          "q": "2026Q2",
+          "eps": 2.51
+        }
+      ],
+      "gpm_latest": 28.86,
+      "gpm_prev": 30.46,
+      "gpm_delta": -1.6,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.34,
+      "balance_ok": false,
+      "foreign_hold_pct": 14.83,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -734651,
+        740472,
+        842342,
+        -789718,
+        1170556
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2354": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 2.53
+        },
+        {
+          "year": 2025,
+          "eps": 2.31
+        },
+        {
+          "year": 2026,
+          "eps": 1.1
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 0.67
+        },
+        {
+          "q": "2025Q2",
+          "eps": 0.38
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.62
+        },
+        {
+          "q": "2025Q4",
+          "eps": 0.64
+        },
+        {
+          "q": "2026Q1",
+          "eps": 0.47
+        },
+        {
+          "q": "2026Q2",
+          "eps": 0.63
+        }
+      ],
+      "gpm_latest": 4.03,
+      "gpm_prev": 2.97,
+      "gpm_delta": 1.06,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.2,
+      "balance_ok": true,
+      "foreign_hold_pct": 12.81,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        193504,
+        1119730,
+        9540587,
+        -8305496,
+        5296707
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2317": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 11.01
+        },
+        {
+          "year": 2025,
+          "eps": 13.6
+        },
+        {
+          "year": 2026,
+          "eps": 7.83
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 3.03
+        },
+        {
+          "q": "2025Q2",
+          "eps": 3.19
+        },
+        {
+          "q": "2025Q3",
+          "eps": 4.15
+        },
+        {
+          "q": "2025Q4",
+          "eps": 3.23
+        },
+        {
+          "q": "2026Q1",
+          "eps": 3.56
+        },
+        {
+          "q": "2026Q2",
+          "eps": 4.27
+        }
+      ],
+      "gpm_latest": 6.12,
+      "gpm_prev": 6.33,
+      "gpm_delta": -0.21,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.42,
+      "balance_ok": false,
+      "foreign_hold_pct": 40.36,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -15521575,
+        -2071008,
+        18248973,
+        1192347,
+        -3855072
+      ],
+      "foreign_buy_days": 2,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3034": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 33.43
+        },
+        {
+          "year": 2025,
+          "eps": 26.87
+        },
+        {
+          "year": 2026,
+          "eps": 16.59
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 8.65
+        },
+        {
+          "q": "2025Q2",
+          "eps": 6.14
+        },
+        {
+          "q": "2025Q3",
+          "eps": 6.01
+        },
+        {
+          "q": "2025Q4",
+          "eps": 6.07
+        },
+        {
+          "q": "2026Q1",
+          "eps": 6.19
+        },
+        {
+          "q": "2026Q2",
+          "eps": 10.4
+        }
+      ],
+      "gpm_latest": 42.42,
+      "gpm_prev": 36.3,
+      "gpm_delta": 6.12,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.22,
+      "balance_ok": true,
+      "foreign_hold_pct": 43.49,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        2285053,
+        2204476,
+        77105,
+        -380276,
+        62940
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3037": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 3.35
+        },
+        {
+          "year": 2025,
+          "eps": 4.38
+        },
+        {
+          "year": 2026,
+          "eps": 11.73
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 0.6
+        },
+        {
+          "q": "2025Q2",
+          "eps": 0.02
+        },
+        {
+          "q": "2025Q3",
+          "eps": 1.44
+        },
+        {
+          "q": "2025Q4",
+          "eps": 2.32
+        },
+        {
+          "q": "2026Q1",
+          "eps": 3.28
+        },
+        {
+          "q": "2026Q2",
+          "eps": 8.45
+        }
+      ],
+      "gpm_latest": 24.8,
+      "gpm_prev": 13.08,
+      "gpm_delta": 11.72,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.76,
+      "balance_ok": true,
+      "foreign_hold_pct": 40.07,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        3068442,
+        2916764,
+        181470,
+        3673341,
+        2206912
+      ],
+      "foreign_buy_days": 5,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3044": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 15.94
+        },
+        {
+          "year": 2025,
+          "eps": 19.45
+        },
+        {
+          "year": 2026,
+          "eps": 13.02
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 4.48
+        },
+        {
+          "q": "2025Q2",
+          "eps": 4.65
+        },
+        {
+          "q": "2025Q3",
+          "eps": 5.62
+        },
+        {
+          "q": "2025Q4",
+          "eps": 4.7
+        },
+        {
+          "q": "2026Q1",
+          "eps": 5.61
+        },
+        {
+          "q": "2026Q2",
+          "eps": 7.41
+        }
+      ],
+      "gpm_latest": 30.09,
+      "gpm_prev": 26.21,
+      "gpm_delta": 3.88,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.62,
+      "balance_ok": true,
+      "foreign_hold_pct": 48.48,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        155914,
+        -76366,
+        167510,
+        646053,
+        91366
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2360": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 12.49
+        },
+        {
+          "year": 2025,
+          "eps": 27.68
+        },
+        {
+          "year": 2026,
+          "eps": 21.27
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 5.03
+        },
+        {
+          "q": "2025Q2",
+          "eps": 4.63
+        },
+        {
+          "q": "2025Q3",
+          "eps": 11.99
+        },
+        {
+          "q": "2025Q4",
+          "eps": 6.03
+        },
+        {
+          "q": "2026Q1",
+          "eps": 9.12
+        },
+        {
+          "q": "2026Q2",
+          "eps": 12.15
+        }
+      ],
+      "gpm_latest": 60.5,
+      "gpm_prev": 65.44,
+      "gpm_delta": -4.94,
+      "gpm_ok": false,
+      "de_ratio": null,
+      "current_ratio": 1.67,
+      "balance_ok": true,
+      "foreign_hold_pct": 59.06,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        989638,
+        -185866,
+        182324,
+        57483,
+        300416
+      ],
+      "foreign_buy_days": 4,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2385": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 12.43
+        },
+        {
+          "year": 2025,
+          "eps": 9.06
+        },
+        {
+          "year": 2026,
+          "eps": 5.06
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 2.19
+        },
+        {
+          "q": "2025Q2",
+          "eps": 2.96
+        },
+        {
+          "q": "2025Q3",
+          "eps": 2.87
+        },
+        {
+          "q": "2025Q4",
+          "eps": 1.04
+        },
+        {
+          "q": "2026Q1",
+          "eps": 2.0
+        },
+        {
+          "q": "2026Q2",
+          "eps": 3.06
+        }
+      ],
+      "gpm_latest": 13.62,
+      "gpm_prev": 17.73,
+      "gpm_delta": -4.11,
+      "gpm_ok": false,
+      "de_ratio": null,
+      "current_ratio": 1.43,
+      "balance_ok": false,
+      "foreign_hold_pct": 23.82,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        526920,
+        592132,
+        1122651,
+        74381,
+        393371
+      ],
+      "foreign_buy_days": 5,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2345": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 21.49
+        },
+        {
+          "year": 2025,
+          "eps": 47.13
+        },
+        {
+          "year": 2026,
+          "eps": 34.7
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 9.17
+        },
+        {
+          "q": "2025Q2",
+          "eps": 9.01
+        },
+        {
+          "q": "2025Q3",
+          "eps": 14.0
+        },
+        {
+          "q": "2025Q4",
+          "eps": 14.95
+        },
+        {
+          "q": "2026Q1",
+          "eps": 14.92
+        },
+        {
+          "q": "2026Q2",
+          "eps": 19.78
+        }
+      ],
+      "gpm_latest": 19.7,
+      "gpm_prev": 17.93,
+      "gpm_delta": 1.77,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.42,
+      "balance_ok": false,
+      "foreign_hold_pct": 56.93,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -133143,
+        325725,
+        -115778,
+        -531917,
+        -284371
+      ],
+      "foreign_buy_days": 1,
+      "pe": null,
+      "segment_warning": false
+    },
+    "5388": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 7.74
+        },
+        {
+          "year": 2025,
+          "eps": 4.04
+        },
+        {
+          "year": 2026,
+          "eps": 2.59
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 1.02
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.13
+        },
+        {
+          "q": "2025Q3",
+          "eps": 1.0
+        },
+        {
+          "q": "2025Q4",
+          "eps": 0.89
+        },
+        {
+          "q": "2026Q1",
+          "eps": 1.01
+        },
+        {
+          "q": "2026Q2",
+          "eps": 1.58
+        }
+      ],
+      "gpm_latest": 12.3,
+      "gpm_prev": 16.58,
+      "gpm_delta": -4.28,
+      "gpm_ok": false,
+      "de_ratio": null,
+      "current_ratio": 1.3,
+      "balance_ok": false,
+      "foreign_hold_pct": 13.75,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -1550740,
+        -803000,
+        -529000,
+        -601340,
+        -832227
+      ],
+      "foreign_buy_days": 0,
+      "pe": null,
+      "segment_warning": false
+    },
+    "2332": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 0.07
+        },
+        {
+          "year": 2025,
+          "eps": -0.91
+        },
+        {
+          "year": 2026,
+          "eps": -0.07
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": -0.28
+        },
+        {
+          "q": "2025Q2",
+          "eps": -0.23
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.02
+        },
+        {
+          "q": "2025Q4",
+          "eps": -0.42
+        },
+        {
+          "q": "2026Q1",
+          "eps": -0.05
+        },
+        {
+          "q": "2026Q2",
+          "eps": -0.02
+        }
+      ],
+      "gpm_latest": 24.09,
+      "gpm_prev": 24.93,
+      "gpm_delta": -0.84,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.46,
+      "balance_ok": true,
+      "foreign_hold_pct": 5.84,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -232210,
+        -2638599,
+        -205290,
+        -554624,
+        -3756746
+      ],
+      "foreign_buy_days": 0,
+      "pe": null,
+      "segment_warning": true
+    },
+    "6277": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 4.15
+        },
+        {
+          "year": 2025,
+          "eps": 3.08
+        },
+        {
+          "year": 2026,
+          "eps": 2.5
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 0.91
+        },
+        {
+          "q": "2025Q2",
+          "eps": 0.53
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.85
+        },
+        {
+          "q": "2025Q4",
+          "eps": 0.79
+        },
+        {
+          "q": "2026Q1",
+          "eps": 1.08
+        },
+        {
+          "q": "2026Q2",
+          "eps": 1.42
+        }
+      ],
+      "gpm_latest": 62.43,
+      "gpm_prev": 59.51,
+      "gpm_delta": 2.92,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.05,
+      "balance_ok": true,
+      "foreign_hold_pct": 12.51,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -30000,
+        68449,
+        -69926,
+        -23974,
+        -58730
+      ],
+      "foreign_buy_days": 1,
+      "pe": null,
+      "segment_warning": false
+    },
+    "4906": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 1.57
+        },
+        {
+          "year": 2025,
+          "eps": -0.25
+        },
+        {
+          "year": 2026,
+          "eps": -0.42
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 0.15
+        },
+        {
+          "q": "2025Q2",
+          "eps": -0.96
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.36
+        },
+        {
+          "q": "2025Q4",
+          "eps": 0.2
+        },
+        {
+          "q": "2026Q1",
+          "eps": -0.32
+        },
+        {
+          "q": "2026Q2",
+          "eps": -0.1
+        }
+      ],
+      "gpm_latest": 12.16,
+      "gpm_prev": 13.45,
+      "gpm_delta": -1.29,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.62,
+      "balance_ok": true,
+      "foreign_hold_pct": 7.35,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -146117,
+        453555,
+        -3264571,
+        -5537802,
+        -1068000
+      ],
+      "foreign_buy_days": 1,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3491": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 8.58
+        },
+        {
+          "year": 2025,
+          "eps": 7.85
+        },
+        {
+          "year": 2026,
+          "eps": 8.15
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 2.22
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.07
+        },
+        {
+          "q": "2025Q3",
+          "eps": 1.33
+        },
+        {
+          "q": "2025Q4",
+          "eps": 3.23
+        },
+        {
+          "q": "2026Q1",
+          "eps": 3.68
+        },
+        {
+          "q": "2026Q2",
+          "eps": 4.47
+        }
+      ],
+      "gpm_latest": 55.6,
+      "gpm_prev": 43.35,
+      "gpm_delta": 12.25,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 2.63,
+      "balance_ok": true,
+      "foreign_hold_pct": 31.41,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        -323103,
+        -100157,
+        -14655,
+        -336781,
+        -243825
+      ],
+      "foreign_buy_days": 0,
+      "pe": null,
+      "segment_warning": false
+    },
+    "6213": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 2.26
+        },
+        {
+          "year": 2025,
+          "eps": 4.16
+        },
+        {
+          "year": 2026,
+          "eps": 4.39
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 0.93
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.16
+        },
+        {
+          "q": "2025Q3",
+          "eps": 0.89
+        },
+        {
+          "q": "2025Q4",
+          "eps": 1.18
+        },
+        {
+          "q": "2026Q1",
+          "eps": 0.87
+        },
+        {
+          "q": "2026Q2",
+          "eps": 3.52
+        }
+      ],
+      "gpm_latest": 22.02,
+      "gpm_prev": 15.59,
+      "gpm_delta": 6.43,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.73,
+      "balance_ok": true,
+      "foreign_hold_pct": 21.57,
+      "foreign_hold_ok": true,
+      "foreign_net_5d": [
+        905931,
+        -3596262,
+        334528,
+        1524738,
+        -859228
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": false
+    },
+    "3706": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 3.28
+        },
+        {
+          "year": 2025,
+          "eps": 5.36
+        },
+        {
+          "year": 2026,
+          "eps": 2.58
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": 1.11
+        },
+        {
+          "q": "2025Q2",
+          "eps": 1.23
+        },
+        {
+          "q": "2025Q3",
+          "eps": 1.55
+        },
+        {
+          "q": "2025Q4",
+          "eps": 1.47
+        },
+        {
+          "q": "2026Q1",
+          "eps": 1.1
+        },
+        {
+          "q": "2026Q2",
+          "eps": 1.48
+        }
+      ],
+      "gpm_latest": 9.15,
+      "gpm_prev": 10.72,
+      "gpm_delta": -1.57,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 1.89,
+      "balance_ok": true,
+      "foreign_hold_pct": 9.31,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        -3537000,
+        292360,
+        1486350,
+        1280259,
+        -411060
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": true
+    },
+    "3085": {
+      "eps_yoy_ok": true,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": -1.69
+        },
+        {
+          "year": 2025,
+          "eps": -0.56
+        },
+        {
+          "year": 2026,
+          "eps": -0.34
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": -0.17
+        },
+        {
+          "q": "2025Q2",
+          "eps": -0.13
+        },
+        {
+          "q": "2025Q3",
+          "eps": -0.16
+        },
+        {
+          "q": "2025Q4",
+          "eps": -0.1
+        },
+        {
+          "q": "2026Q1",
+          "eps": -0.24
+        },
+        {
+          "q": "2026Q2",
+          "eps": -0.1
+        }
+      ],
+      "gpm_latest": 61.77,
+      "gpm_prev": 57.12,
+      "gpm_delta": 4.65,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 3.57,
+      "balance_ok": true,
+      "foreign_hold_pct": 5.69,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [],
+      "foreign_buy_days": null,
+      "pe": null,
+      "segment_warning": true
+    },
+    "4977": {
+      "eps_yoy_ok": false,
+      "eps_annual": [
+        {
+          "year": 2024,
+          "eps": 3.28
+        },
+        {
+          "year": 2025,
+          "eps": 4.5
+        },
+        {
+          "year": 2026,
+          "eps": 1.48
+        }
+      ],
+      "eps_quarterly": [
+        {
+          "q": "2025Q1",
+          "eps": -1.29
+        },
+        {
+          "q": "2025Q2",
+          "eps": 3.82
+        },
+        {
+          "q": "2025Q3",
+          "eps": 1.02
+        },
+        {
+          "q": "2025Q4",
+          "eps": 0.95
+        },
+        {
+          "q": "2026Q1",
+          "eps": -1.18
+        },
+        {
+          "q": "2026Q2",
+          "eps": 2.66
+        }
+      ],
+      "gpm_latest": 23.12,
+      "gpm_prev": 23.17,
+      "gpm_delta": -0.05,
+      "gpm_ok": true,
+      "de_ratio": null,
+      "current_ratio": 4.54,
+      "balance_ok": true,
+      "foreign_hold_pct": 14.65,
+      "foreign_hold_ok": false,
+      "foreign_net_5d": [
+        353853,
+        561674,
+        -585724,
+        526100,
+        -302178
+      ],
+      "foreign_buy_days": 3,
+      "pe": null,
+      "segment_warning": true
+    }
+  }
+}
