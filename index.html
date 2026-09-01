@@ -181,6 +181,46 @@
     td, th { padding: 7px 8px; }
     .dist-cell, .target-cell { font-size: 12px; }
   }
+
+  /* ── 財報展開 panel ── */
+  .code-btn { cursor: pointer; user-select: none; }
+  .code-btn:hover { opacity: .75; }
+  .fin-panel-row td { padding: 0 !important; border: none; }
+  .fin-panel-row:hover td { background: inherit !important; }
+  .fin-panel { padding: 12px 14px; background: var(--header-bg); border-top: 1px solid var(--border); }
+  .fin-empty { color: var(--muted); font-style: italic; font-size: 12px; padding: 4px 0; }
+  .fin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px 16px;
+  }
+  .fin-block { font-size: 12px; }
+  .fin-hd {
+    font-weight: 700; font-size: 10px; text-transform: uppercase;
+    letter-spacing: .5px; color: var(--accent); margin-bottom: 5px;
+  }
+  .fin-stat { color: var(--text); margin: 2px 0; font-size: 12px; }
+  .fin-tbl { border-collapse: collapse; width: 100%; margin-bottom: 5px; font-size: 11px; }
+  .fin-tbl th, .fin-tbl td {
+    padding: 2px 5px; border: 1px solid var(--border); text-align: right;
+  }
+  .fin-tbl th:first-child, .fin-tbl td:first-child { text-align: left; }
+  .fin-qs { display: flex; flex-wrap: wrap; gap: 3px 8px; font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .fin-pass { color: var(--green); font-weight: 700; }
+  .fin-fail { color: var(--red);   font-weight: 700; }
+  .fin-warn { color: var(--amber); font-weight: 700; }
+  .fin-unk  { color: var(--muted); }
+  .fn-buy  { color: var(--green); font-weight: 600; }
+  .fn-sell { color: var(--red);   font-weight: 600; }
+  .fin-muted { color: var(--muted); font-size: 11px; }
+  .fin-seg-warn {
+    display: inline-block;
+    background: rgba(180,83,9,.1); color: var(--amber);
+    padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; margin-bottom: 8px;
+  }
+  .arrow { font-style: normal; }
+
 </style>
 </head>
 <body>
@@ -256,123 +296,153 @@
       </thead>
       <tbody>
         <tr>
-          <td><span class="code">2330</span></td>
+          <td><span id="btn-2330" class="code code-btn" onclick="toggleFin('2330')">2330<span class="arrow"> ▸</span></span></td>
           <td>台積電</td>
-          <td>2,405.0</td>
-          <td>2,384.5</td>
-          <td>2,236.7</td>
+          <td>2,430.0</td>
+          <td>2,386.9</td>
+          <td>2,240.9</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">1901~2125</td>
-          <td class="dist-cell">-13.2%（偏高）</td>
+          <td class="dist-cell">-14.4%（偏高）</td>
+        </tr>
+        <tr id="fin-2330" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2454</span></td>
+          <td><span id="btn-2454" class="code code-btn" onclick="toggleFin('2454')">2454<span class="arrow"> ▸</span></span></td>
           <td>聯發科</td>
-          <td>3,925.0</td>
-          <td>3,951.2</td>
-          <td>3,299.2</td>
+          <td>4,315.0</td>
+          <td>3,955.7</td>
+          <td>3,320.5</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">2804~3134</td>
-          <td class="dist-cell">-25.2%（偏高）</td>
+          <td class="dist-cell">-37.7%（偏高）</td>
+        </tr>
+        <tr id="fin-2454" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">3711</span></td>
+          <td><span id="btn-3711" class="code code-btn" onclick="toggleFin('3711')">3711<span class="arrow"> ▸</span></span></td>
           <td>日月光投控</td>
-          <td>584.0</td>
-          <td>614.6</td>
-          <td>537.5</td>
+          <td>612.0</td>
+          <td>615.8</td>
+          <td>539.7</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">457~511</td>
-          <td class="dist-cell">-14.3%（偏高）</td>
+          <td class="dist-cell">-19.8%（偏高）</td>
+        </tr>
+        <tr id="fin-3711" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">5274</span></td>
+          <td><span id="btn-5274" class="code code-btn" onclick="toggleFin('5274')">5274<span class="arrow"> ▸</span></span></td>
           <td>信驊</td>
-          <td>16,065.0</td>
-          <td>15,379.0</td>
-          <td>14,400.4</td>
+          <td>17,500.0</td>
+          <td>15,406.3</td>
+          <td>14,470.4</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">12240~13680</td>
-          <td class="dist-cell">-17.4%（偏高）</td>
+          <td class="dist-cell">-27.9%（偏高）</td>
+        </tr>
+        <tr id="fin-5274" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">6533</span></td>
+          <td><span id="btn-6533" class="code code-btn" onclick="toggleFin('6533')">6533<span class="arrow"> ▸</span></span></td>
           <td>矽力-KY</td>
-          <td>261.0</td>
-          <td>221.3</td>
-          <td>217.6</td>
+          <td>254.0</td>
+          <td>222.1</td>
+          <td>218.1</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
+          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">185~207</td>
-          <td class="dist-cell">-26.1%（偏高）</td>
+          <td class="dist-cell">-22.7%（偏高）</td>
+        </tr>
+        <tr id="fin-6533" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2303</span></td>
+          <td><span id="btn-2303" class="code code-btn" onclick="toggleFin('2303')">2303<span class="arrow"> ▸</span></span></td>
           <td>聯電</td>
-          <td>129.0</td>
-          <td>136.4</td>
-          <td>110.1</td>
+          <td>133.0</td>
+          <td>136.7</td>
+          <td>110.7</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">94~105</td>
-          <td class="dist-cell">-22.9%（偏高）</td>
+          <td class="dist-cell">-26.7%（偏高）</td>
+        </tr>
+        <tr id="fin-2303" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2379</span></td>
+          <td><span id="btn-2379" class="code code-btn" onclick="toggleFin('2379')">2379<span class="arrow"> ▸</span></span></td>
           <td>瑞昱</td>
-          <td>721.0</td>
-          <td>743.2</td>
-          <td>640.6</td>
+          <td>740.0</td>
+          <td>745.6</td>
+          <td>642.9</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">545~609</td>
-          <td class="dist-cell">-18.4%（偏高）</td>
+          <td class="dist-cell">-21.5%（偏高）</td>
+        </tr>
+        <tr id="fin-2379" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">6488</span></td>
+          <td><span id="btn-6488" class="code code-btn" onclick="toggleFin('6488')">6488<span class="arrow"> ▸</span></span></td>
           <td>環球晶</td>
-          <td>912.0</td>
-          <td>1,041.0</td>
-          <td>828.0</td>
+          <td>980.0</td>
+          <td>1,044.6</td>
+          <td>832.2</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">704~787</td>
-          <td class="dist-cell">-15.9%（偏高）</td>
+          <td class="dist-cell">-24.5%（偏高）</td>
+        </tr>
+        <tr id="fin-6488" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2408</span></td>
+          <td><span id="btn-2408" class="code code-btn" onclick="toggleFin('2408')">2408<span class="arrow"> ▸</span></span></td>
           <td>南亞科</td>
-          <td>543.0</td>
-          <td>442.1</td>
-          <td>352.4</td>
+          <td>520.0</td>
+          <td>445.2</td>
+          <td>354.6</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">300~335</td>
-          <td class="dist-cell">-62.1%（偏高）</td>
+          <td class="dist-cell">-55.2%（偏高）</td>
+        </tr>
+        <tr id="fin-2408" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
-        <tr class="in-zone">
-          <td><span class="code">4966</span></td>
+        <tr>
+          <td><span id="btn-4966" class="code code-btn" onclick="toggleFin('4966')">4966<span class="arrow"> ▸</span></span></td>
           <td>譜瑞-KY</td>
-          <td>578.0</td>
-          <td>607.8</td>
-          <td>609.4</td>
+          <td>586.0</td>
+          <td>606.6</td>
+          <td>610.0</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">518~579</td>
-          <td class="dist-cell">✅ 在目標區</td>
+          <td class="dist-cell">-1.2%（偏高）</td>
+        </tr>
+        <tr id="fin-4966" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr></tbody>
     </table>
   </div>
@@ -396,123 +466,153 @@
       </thead>
       <tbody>
         <tr>
-          <td><span class="code">2382</span></td>
+          <td><span id="btn-2382" class="code code-btn" onclick="toggleFin('2382')">2382<span class="arrow"> ▸</span></span></td>
           <td>廣達</td>
-          <td>338.5</td>
-          <td>337.1</td>
-          <td>320.7</td>
+          <td>337.0</td>
+          <td>336.7</td>
+          <td>321.2</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">273~305</td>
-          <td class="dist-cell">-11.0%（偏高）</td>
+          <td class="dist-cell">-10.5%（偏高）</td>
+        </tr>
+        <tr id="fin-2382" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">6669</span></td>
+          <td><span id="btn-6669" class="code code-btn" onclick="toggleFin('6669')">6669<span class="arrow"> ▸</span></span></td>
           <td>緯穎</td>
-          <td>7,095.0</td>
-          <td>5,471.2</td>
-          <td>4,910.2</td>
+          <td>7,545.0</td>
+          <td>5,511.5</td>
+          <td>4,939.2</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">4174~4665</td>
-          <td class="dist-cell">-52.1%（偏高）</td>
+          <td class="dist-cell">-61.7%（偏高）</td>
+        </tr>
+        <tr id="fin-6669" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr class="near-zone">
-          <td><span class="code">6230</span></td>
+          <td><span id="btn-6230" class="code code-btn" onclick="toggleFin('6230')">6230<span class="arrow"> ▸</span></span></td>
           <td>超眾</td>
-          <td>108.0</td>
-          <td>118.3</td>
-          <td>135.0</td>
+          <td>110.5</td>
+          <td>117.9</td>
+          <td>134.5</td>
           <td style="text-align:center"><span class="slope-down">↓</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">115~128</td>
-          <td class="dist-cell">+6.1%（尚早）</td>
+          <td class="dist-cell">+3.9%（尚早）</td>
+        </tr>
+        <tr id="fin-6230" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">3324</span></td>
+          <td><span id="btn-3324" class="code code-btn" onclick="toggleFin('3324')">3324<span class="arrow"> ▸</span></span></td>
           <td>双鴻</td>
-          <td>1,250.0</td>
-          <td>989.9</td>
-          <td>1,012.9</td>
+          <td>1,340.0</td>
+          <td>994.2</td>
+          <td>1,015.6</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">861~962</td>
-          <td class="dist-cell">-29.9%（偏高）</td>
+          <td class="dist-cell">-39.3%（偏高）</td>
+        </tr>
+        <tr id="fin-3324" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2308</span></td>
+          <td><span id="btn-2308" class="code code-btn" onclick="toggleFin('2308')">2308<span class="arrow"> ▸</span></span></td>
           <td>台達電</td>
-          <td>1,840.0</td>
-          <td>1,877.9</td>
-          <td>1,886.8</td>
+          <td>1,850.0</td>
+          <td>1,871.3</td>
+          <td>1,890.6</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">1604~1792</td>
-          <td class="dist-cell">-2.7%（偏高）</td>
+          <td class="dist-cell">-3.2%（偏高）</td>
+        </tr>
+        <tr id="fin-2308" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">3017</span></td>
+          <td><span id="btn-3017" class="code code-btn" onclick="toggleFin('3017')">3017<span class="arrow"> ▸</span></span></td>
           <td>奇鋐</td>
-          <td>3,425.0</td>
-          <td>2,576.1</td>
-          <td>2,479.2</td>
+          <td>3,385.0</td>
+          <td>2,589.9</td>
+          <td>2,492.0</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">2107~2355</td>
-          <td class="dist-cell">-45.4%（偏高）</td>
+          <td class="dist-cell">-43.7%（偏高）</td>
+        </tr>
+        <tr id="fin-3017" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2356</span></td>
+          <td><span id="btn-2356" class="code code-btn" onclick="toggleFin('2356')">2356<span class="arrow"> ▸</span></span></td>
           <td>英業達</td>
-          <td>66.7</td>
+          <td>66.5</td>
           <td>64.3</td>
-          <td>56.6</td>
+          <td>56.8</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">48~54</td>
-          <td class="dist-cell">-23.5%（偏高）</td>
+          <td class="dist-cell">-23.1%（偏高）</td>
+        </tr>
+        <tr id="fin-2356" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">3231</span></td>
+          <td><span id="btn-3231" class="code code-btn" onclick="toggleFin('3231')">3231<span class="arrow"> ▸</span></span></td>
           <td>緯創</td>
-          <td>178.0</td>
-          <td>165.4</td>
-          <td>150.3</td>
+          <td>179.5</td>
+          <td>165.7</td>
+          <td>150.7</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">128~143</td>
-          <td class="dist-cell">-24.5%（偏高）</td>
+          <td class="dist-cell">-25.5%（偏高）</td>
+        </tr>
+        <tr id="fin-3231" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2301</span></td>
+          <td><span id="btn-2301" class="code code-btn" onclick="toggleFin('2301')">2301<span class="arrow"> ▸</span></span></td>
           <td>光寶科</td>
-          <td>305.0</td>
-          <td>231.6</td>
-          <td>206.6</td>
+          <td>300.5</td>
+          <td>233.0</td>
+          <td>207.8</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">176~196</td>
-          <td class="dist-cell">-55.6%（偏高）</td>
+          <td class="dist-cell">-53.3%（偏高）</td>
+        </tr>
+        <tr id="fin-2301" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2421</span></td>
+          <td><span id="btn-2421" class="code code-btn" onclick="toggleFin('2421')">2421<span class="arrow"> ▸</span></span></td>
           <td>建準</td>
-          <td>179.5</td>
-          <td>142.9</td>
-          <td>142.0</td>
+          <td>177.5</td>
+          <td>143.3</td>
+          <td>142.3</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">121~135</td>
-          <td class="dist-cell">-33.0%（偏高）</td>
+          <td class="dist-cell">-31.5%（偏高）</td>
+        </tr>
+        <tr id="fin-2421" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr></tbody>
     </table>
   </div>
@@ -536,123 +636,153 @@
       </thead>
       <tbody>
         <tr>
-          <td><span class="code">3008</span></td>
+          <td><span id="btn-3008" class="code code-btn" onclick="toggleFin('3008')">3008<span class="arrow"> ▸</span></span></td>
           <td>大立光</td>
-          <td>7,650.0</td>
-          <td>4,581.7</td>
-          <td>3,658.1</td>
+          <td>7,675.0</td>
+          <td>4,651.2</td>
+          <td>3,702.8</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">3109~3475</td>
-          <td class="dist-cell">-120.1%（偏高）</td>
+          <td class="dist-cell">-120.9%（偏高）</td>
+        </tr>
+        <tr id="fin-3008" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">4938</span></td>
+          <td><span id="btn-4938" class="code code-btn" onclick="toggleFin('4938')">4938<span class="arrow"> ▸</span></span></td>
           <td>和碩</td>
-          <td>91.1</td>
+          <td>90.9</td>
           <td>86.1</td>
-          <td>82.0</td>
+          <td>82.2</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">70~78</td>
-          <td class="dist-cell">-16.8%（偏高）</td>
+          <td class="dist-cell">-16.5%（偏高）</td>
+        </tr>
+        <tr id="fin-4938" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2474</span></td>
+          <td><span id="btn-2474" class="code code-btn" onclick="toggleFin('2474')">2474<span class="arrow"> ▸</span></span></td>
           <td>可成</td>
-          <td>208.5</td>
+          <td>212.5</td>
           <td>196.5</td>
-          <td>195.4</td>
+          <td>195.7</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">166~186</td>
-          <td class="dist-cell">-12.1%（偏高）</td>
+          <td class="dist-cell">-14.2%（偏高）</td>
+        </tr>
+        <tr id="fin-2474" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2354</span></td>
+          <td><span id="btn-2354" class="code code-btn" onclick="toggleFin('2354')">2354<span class="arrow"> ▸</span></span></td>
           <td>鴻準</td>
-          <td>64.7</td>
-          <td>57.5</td>
-          <td>55.8</td>
-          <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
-          <td class="target-cell">47~53</td>
-          <td class="dist-cell">-22.1%（偏高）</td>
-        </tr>
-
-        <tr>
-          <td><span class="code">2317</span></td>
-          <td>鴻海</td>
-          <td>250.0</td>
-          <td>249.3</td>
-          <td>236.1</td>
-          <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
-          <td class="target-cell">201~224</td>
-          <td class="dist-cell">-11.6%（偏高）</td>
-        </tr>
-
-        <tr>
-          <td><span class="code">3034</span></td>
-          <td>聯詠</td>
-          <td>540.0</td>
-          <td>509.1</td>
-          <td>460.4</td>
-          <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
-          <td class="target-cell">391~437</td>
-          <td class="dist-cell">-23.6%（偏高）</td>
-        </tr>
-
-        <tr>
-          <td><span class="code">3037</span></td>
-          <td>欣興</td>
-          <td>999.0</td>
-          <td>950.4</td>
-          <td>844.8</td>
+          <td>65.8</td>
+          <td>57.7</td>
+          <td>55.9</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
+          <td class="target-cell">47~53</td>
+          <td class="dist-cell">-24.2%（偏高）</td>
+        </tr>
+        <tr id="fin-2354" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
+        </tr>
+
+        <tr>
+          <td><span id="btn-2317" class="code code-btn" onclick="toggleFin('2317')">2317<span class="arrow"> ▸</span></span></td>
+          <td>鴻海</td>
+          <td>254.5</td>
+          <td>249.1</td>
+          <td>236.5</td>
+          <td style="text-align:center"><span class="slope-up">↑</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
+          <td class="target-cell">201~224</td>
+          <td class="dist-cell">-13.6%（偏高）</td>
+        </tr>
+        <tr id="fin-2317" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
+        </tr>
+
+        <tr>
+          <td><span id="btn-3034" class="code code-btn" onclick="toggleFin('3034')">3034<span class="arrow"> ▸</span></span></td>
+          <td>聯詠</td>
+          <td>548.0</td>
+          <td>510.7</td>
+          <td>461.9</td>
+          <td style="text-align:center"><span class="slope-up">↑</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
+          <td class="target-cell">391~437</td>
+          <td class="dist-cell">-25.4%（偏高）</td>
+        </tr>
+        <tr id="fin-3034" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
+        </tr>
+
+        <tr>
+          <td><span id="btn-3037" class="code code-btn" onclick="toggleFin('3037')">3037<span class="arrow"> ▸</span></span></td>
+          <td>欣興</td>
+          <td>974.0</td>
+          <td>951.5</td>
+          <td>849.0</td>
+          <td style="text-align:center"><span class="slope-up">↑</span></td>
+          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">718~803</td>
-          <td class="dist-cell">-24.4%（偏高）</td>
+          <td class="dist-cell">-21.3%（偏高）</td>
+        </tr>
+        <tr id="fin-3037" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">3044</span></td>
+          <td><span id="btn-3044" class="code code-btn" onclick="toggleFin('3044')">3044<span class="arrow"> ▸</span></span></td>
           <td>健鼎</td>
-          <td>496.5</td>
-          <td>455.8</td>
-          <td>438.8</td>
+          <td>502.0</td>
+          <td>456.4</td>
+          <td>440.1</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">373~417</td>
-          <td class="dist-cell">-19.1%（偏高）</td>
+          <td class="dist-cell">-20.4%（偏高）</td>
+        </tr>
+        <tr id="fin-3044" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">2360</span></td>
+          <td><span id="btn-2360" class="code code-btn" onclick="toggleFin('2360')">2360<span class="arrow"> ▸</span></span></td>
           <td>致茂</td>
-          <td>1,960.0</td>
-          <td>2,088.3</td>
-          <td>2,042.3</td>
+          <td>2,035.0</td>
+          <td>2,081.8</td>
+          <td>2,047.0</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">1736~1940</td>
-          <td class="dist-cell">-1.0%（偏高）</td>
+          <td class="dist-cell">-4.9%（偏高）</td>
+        </tr>
+        <tr id="fin-2360" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr class="in-zone">
-          <td><span class="code">2385</span></td>
+          <td><span id="btn-2385" class="code code-btn" onclick="toggleFin('2385')">2385<span class="arrow"> ▸</span></span></td>
           <td>群光</td>
-          <td>106.5</td>
-          <td>108.6</td>
-          <td>114.7</td>
+          <td>108.5</td>
+          <td>108.2</td>
+          <td>114.6</td>
           <td style="text-align:center"><span class="slope-down">↓</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">97~109</td>
           <td class="dist-cell">✅ 在目標區</td>
+        </tr>
+        <tr id="fin-2385" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr></tbody>
     </table>
   </div>
@@ -675,104 +805,128 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="in-zone">
-          <td><span class="code">2345</span></td>
+        <tr>
+          <td><span id="btn-2345" class="code code-btn" onclick="toggleFin('2345')">2345<span class="arrow"> ▸</span></span></td>
           <td>智邦</td>
-          <td>2,035.0</td>
-          <td>2,290.3</td>
-          <td>2,181.0</td>
+          <td>2,145.0</td>
+          <td>2,286.0</td>
+          <td>2,186.5</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">1854~2072</td>
-          <td class="dist-cell">✅ 在目標區</td>
+          <td class="dist-cell">-3.5%（偏高）</td>
+        </tr>
+        <tr id="fin-2345" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr class="in-zone">
-          <td><span class="code">5388</span></td>
+          <td><span id="btn-5388" class="code code-btn" onclick="toggleFin('5388')">5388<span class="arrow"> ▸</span></span></td>
           <td>中磊</td>
           <td>77.2</td>
-          <td>83.3</td>
+          <td>83.2</td>
           <td>82.0</td>
-          <td style="text-align:center"><span class="slope-up">↑</span></td>
+          <td style="text-align:center"><span class="slope-flat">→</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">70~78</td>
           <td class="dist-cell">✅ 在目標區</td>
         </tr>
+        <tr id="fin-5388" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
+        </tr>
 
         <tr>
-          <td><span class="code">2332</span></td>
+          <td><span id="btn-2332" class="code code-btn" onclick="toggleFin('2332')">2332<span class="arrow"> ▸</span></span></td>
           <td>友訊</td>
-          <td>19.9</td>
-          <td>20.6</td>
+          <td>20.0</td>
+          <td>20.7</td>
           <td>17.8</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">15~17</td>
-          <td class="dist-cell">-17.1%（偏高）</td>
+          <td class="dist-cell">-17.6%（偏高）</td>
+        </tr>
+        <tr id="fin-2332" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">6277</span></td>
+          <td><span id="btn-6277" class="code code-btn" onclick="toggleFin('6277')">6277<span class="arrow"> ▸</span></span></td>
           <td>宏正</td>
           <td>78.1</td>
-          <td>75.0</td>
-          <td>71.5</td>
+          <td>75.1</td>
+          <td>71.6</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">61~68</td>
           <td class="dist-cell">-14.9%（偏高）</td>
         </tr>
+        <tr id="fin-6277" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
+        </tr>
 
         <tr>
-          <td><span class="code">4906</span></td>
+          <td><span id="btn-4906" class="code code-btn" onclick="toggleFin('4906')">4906<span class="arrow"> ▸</span></span></td>
           <td>正文</td>
-          <td>36.2</td>
-          <td>38.1</td>
+          <td>37.5</td>
           <td>38.0</td>
+          <td>38.1</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">32~36</td>
-          <td class="dist-cell">-0.6%（偏高）</td>
+          <td class="dist-cell">-4.2%（偏高）</td>
+        </tr>
+        <tr id="fin-4906" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
-        <tr class="in-zone">
-          <td><span class="code">3491</span></td>
+        <tr>
+          <td><span id="btn-3491" class="code code-btn" onclick="toggleFin('3491')">3491<span class="arrow"> ▸</span></span></td>
           <td>昇銳</td>
-          <td>1,380.0</td>
-          <td>1,319.3</td>
-          <td>1,498.7</td>
+          <td>1,470.0</td>
+          <td>1,314.2</td>
+          <td>1,500.4</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">1274~1424</td>
-          <td class="dist-cell">✅ 在目標區</td>
+          <td class="dist-cell">-3.2%（偏高）</td>
+        </tr>
+        <tr id="fin-3491" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">6213</span></td>
+          <td><span id="btn-6213" class="code code-btn" onclick="toggleFin('6213')">6213<span class="arrow"> ▸</span></span></td>
           <td>聯茂</td>
-          <td>548.0</td>
-          <td>368.5</td>
-          <td>297.5</td>
+          <td>547.0</td>
+          <td>373.6</td>
+          <td>300.9</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
+          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
           <td class="target-cell">253~283</td>
-          <td class="dist-cell">-93.6%（偏高）</td>
+          <td class="dist-cell">-93.3%（偏高）</td>
+        </tr>
+        <tr id="fin-6213" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr>
-          <td><span class="code">3706</span></td>
+          <td><span id="btn-3706" class="code code-btn" onclick="toggleFin('3706')">3706<span class="arrow"> ▸</span></span></td>
           <td>神達</td>
-          <td>92.5</td>
-          <td>89.4</td>
-          <td>86.4</td>
+          <td>94.1</td>
+          <td>89.5</td>
+          <td>86.5</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
           <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">73~82</td>
-          <td class="dist-cell">-12.8%（偏高）</td>
+          <td class="dist-cell">-14.8%（偏高）</td>
+        </tr>
+        <tr id="fin-3706" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr>
 
         <tr class="in-zone">
-          <td><span class="code">3085</span></td>
+          <td><span id="btn-3085" class="code code-btn" onclick="toggleFin('3085')">3085<span class="arrow"> ▸</span></span></td>
           <td>碩天</td>
           <td>11.8</td>
           <td>12.1</td>
@@ -782,17 +936,23 @@
           <td class="target-cell">10~12</td>
           <td class="dist-cell">✅ 在目標區</td>
         </tr>
+        <tr id="fin-3085" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
+        </tr>
 
         <tr>
-          <td><span class="code">4977</span></td>
+          <td><span id="btn-4977" class="code code-btn" onclick="toggleFin('4977')">4977<span class="arrow"> ▸</span></span></td>
           <td>眾達-KY</td>
-          <td>175.0</td>
-          <td>152.8</td>
-          <td>179.1</td>
+          <td>179.0</td>
+          <td>152.4</td>
+          <td>179.0</td>
           <td style="text-align:center"><span class="slope-up">↑</span></td>
-          <td style="text-align:center"><span class="vol-low">✗ 量不足</span></td>
+          <td style="text-align:center"><span class="vol-ok">✓ 量足</span></td>
           <td class="target-cell">152~170</td>
-          <td class="dist-cell">-2.9%（偏高）</td>
+          <td class="dist-cell">-5.3%（偏高）</td>
+        </tr>
+        <tr id="fin-4977" class="fin-panel-row" style="display:none">
+          <td colspan="9"><div class="fin-panel"><p class="fin-empty">財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code></p></div></td>
         </tr></tbody>
     </table>
   </div>
@@ -818,7 +978,17 @@
   </div>
 </div>
 
-<p class="updated">最後更新：2026/08/31 17:33</p>
+<p class="updated">最後更新：2026/09/01 11:40</p>
 
+<script>
+function toggleFin(code) {
+  var row = document.getElementById('fin-' + code);
+  var btn = document.getElementById('btn-' + code);
+  var open = row.style.display === 'table-row';
+  row.style.display = open ? 'none' : 'table-row';
+  var arrows = btn.querySelectorAll('.arrow');
+  if (arrows.length) arrows[0].textContent = open ? ' ▸' : ' ▾';
+}
+</script>
 </body>
 </html>
