@@ -278,5 +278,165 @@
     "name": "眾達-KY",
     "industry": "網通",
     "target": "152~170"
+  },
+  {
+    "code": "NVDA",
+    "ticker": "NVDA",
+    "name": "NVIDIA",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "MSFT",
+    "ticker": "MSFT",
+    "name": "Microsoft",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "META",
+    "ticker": "META",
+    "name": "Meta",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "GOOGL",
+    "ticker": "GOOGL",
+    "name": "Alphabet",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "AMZN",
+    "ticker": "AMZN",
+    "name": "Amazon",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "AAPL",
+    "ticker": "AAPL",
+    "name": "Apple",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "AMD",
+    "ticker": "AMD",
+    "name": "AMD",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "TSLA",
+    "ticker": "TSLA",
+    "name": "Tesla",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "ORCL",
+    "ticker": "ORCL",
+    "name": "Oracle",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "AVGO",
+    "ticker": "AVGO",
+    "name": "Broadcom",
+    "industry": "AI/科技核心",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "ASML",
+    "ticker": "ASML",
+    "name": "ASML",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "AMAT",
+    "ticker": "AMAT",
+    "name": "Applied Materials",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "KLAC",
+    "ticker": "KLAC",
+    "name": "KLA Corp",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "LRCX",
+    "ticker": "LRCX",
+    "name": "Lam Research",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "MU",
+    "ticker": "MU",
+    "name": "Micron",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "MRVL",
+    "ticker": "MRVL",
+    "name": "Marvell",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "TXN",
+    "ticker": "TXN",
+    "name": "Texas Instruments",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "ON",
+    "ticker": "ON",
+    "name": "onsemi",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "QCOM",
+    "ticker": "QCOM",
+    "name": "Qualcomm",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
+  },
+  {
+    "code": "ARM",
+    "ticker": "ARM",
+    "name": "ARM Holdings",
+    "industry": "半導體供應鏈",
+    "market": "US",
+    "target": ""
   }
 ]
