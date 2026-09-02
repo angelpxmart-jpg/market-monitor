@@ -15,7 +15,8 @@ BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
 CONFIG_FILE    = os.path.join(BASE_DIR, "stocks_config.json")
 LOG_FILE       = os.path.join(BASE_DIR, "event_log.json")
 OUTPUT_FILE    = os.path.join(BASE_DIR, "index.html")
-FINANCIAL_FILE = os.path.join(BASE_DIR, "financial_data.json")
+FINANCIAL_FILE  = os.path.join(BASE_DIR, "financial_data.json")
+DOWNGRADE_FILE  = os.path.join(BASE_DIR, "downgrade_state.json")
 
 INDUSTRY_COLORS = {
     "AI/半導體":        "#6366f1",
@@ -66,6 +67,42 @@ FIN_CSS = """
     font-size: 11px; margin-bottom: 8px;
   }
   .arrow { font-style: normal; }
+"""
+
+# ── 候選區 CSS ──
+CANDIDATE_CSS = """
+  /* ── 候選區 ── */
+  .candidate-title {
+    font-size: 11px; font-weight: 700;
+    color: var(--red); text-transform: uppercase;
+    letter-spacing: 1px; margin: 28px 0 6px;
+  }
+  .candidate-note {
+    font-size: 11px; color: var(--muted);
+    background: rgba(220,38,38,.04);
+    border: 1px solid rgba(220,38,38,.18);
+    border-radius: 6px;
+    padding: 7px 12px;
+    margin-bottom: 12px;
+  }
+  .candidate-note code {
+    font-family: 'SF Mono', monospace;
+    font-size: 11px;
+    background: rgba(0,0,0,.06);
+    padding: 1px 4px; border-radius: 3px;
+  }
+  .tech-warn-badge {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    padding: 1px 4px; border-radius: 3px;
+    background: rgba(220,38,38,.12); color: var(--red);
+    margin-left: 3px; vertical-align: middle;
+  }
+  .fund-warn-badge {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    padding: 1px 4px; border-radius: 3px;
+    background: rgba(180,83,9,.12); color: var(--amber);
+    margin-left: 3px; vertical-align: middle;
+  }
 """
 
 # ── Tab CSS ──
@@ -390,10 +427,13 @@ def row_status(price: float, low, high) -> str:
         return ""
     if low <= price <= high:
         return "in-zone"
-    if price > high * 0.9 and price <= high * 1.0:
+    if price > high:
+        # 偏高側：距目標區上緣 ≤10% → 黃色
+        if (price - high) / high * 100 <= 10:
+            return "near-zone"
         return ""
-    gap = (low - price) / low * 100
-    if 0 < gap <= 10:
+    # 偏低側：距目標區下緣 ≤10% → 黃色
+    if (low - price) / low * 100 <= 10:
         return "near-zone"
     return ""
 
@@ -403,6 +443,85 @@ def load_event_log() -> list:
         return []
     with open(LOG_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+# ────────────── 降級狀態管理 ──────────────
+
+def load_downgrade_state() -> dict:
+    if not os.path.exists(DOWNGRADE_FILE):
+        return {}
+    try:
+        with open(DOWNGRADE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f).get("states", {})
+    except Exception:
+        return {}
+
+
+def save_downgrade_state(states: dict):
+    with open(DOWNGRADE_FILE, "w", encoding="utf-8") as f:
+        json.dump({"updated": datetime.now().strftime("%Y-%m-%d"), "states": states},
+                  f, ensure_ascii=False, indent=2)
+
+
+def check_downgrade(code: str, market: str, data: dict,
+                    fin_data: dict, us_info_data: dict,
+                    state: dict, today_str: str) -> dict:
+    """評估單支股票的降級條件，回傳更新後的 state。"""
+    price = data.get("price")
+    ma120 = data.get("ma120")
+    slope = data.get("slope", "—")
+
+    # 技術面：MA120斜率↓ 或 跌破 ×0.80
+    tech_trigger = bool(price and ma120) and (
+        slope == "↓" or price < ma120 * 0.80
+    )
+
+    # 基本面：EPS 轉負 且 毛利率惡化
+    fund_trigger = False
+    if market == "US":
+        info = (us_info_data or {}).get(code, {})
+        eps  = info.get("trailing_eps")
+        fund_trigger = eps is not None and eps < 0
+    else:
+        fin = (fin_data or {}).get(code)
+        if fin:
+            annual = fin.get("eps_annual", [])
+            latest_eps = annual[-1].get("eps") if annual else None
+            eps_negative = latest_eps is not None and latest_eps < 0
+            gpm_bad = fin.get("gpm_ok") is False
+            fund_trigger = eps_negative and gpm_bad
+
+    # manual_restore 旗標：Angel 手動設定後暫停自動降級
+    if state.get("manual_restore"):
+        if not tech_trigger and not fund_trigger:
+            state["manual_restore"] = False  # 條件消失才解除
+        state["tech_trigger_current"]  = tech_trigger
+        state["fund_trigger_current"]  = fund_trigger
+        return state
+
+    # 更新基本面警告起始日
+    if fund_trigger:
+        if not state.get("fundamental_flag_since"):
+            state["fundamental_flag_since"] = today_str
+    else:
+        state["fundamental_flag_since"] = None
+
+    # 基本面持續 ≥14 天才降級
+    fund_demote = False
+    if fund_trigger and state.get("fundamental_flag_since"):
+        try:
+            flag_dt  = datetime.strptime(state["fundamental_flag_since"], "%Y-%m-%d")
+            today_dt = datetime.strptime(today_str, "%Y-%m-%d")
+            fund_demote = (today_dt - flag_dt).days >= 14
+        except ValueError:
+            pass
+
+    if tech_trigger or fund_demote:
+        state["status"] = "candidate"
+
+    state["tech_trigger_current"] = tech_trigger
+    state["fund_trigger_current"] = fund_trigger
+    return state
 
 
 def fmt(val, suffix="") -> str:
@@ -431,7 +550,8 @@ def vol_html(vol_ok) -> str:
 
 # ────────────── 表格列（含財報 panel）──────────────
 
-def build_stock_rows(stocks_data: list, fin_data: dict, us_info_data: dict = None) -> str:
+def build_stock_rows(stocks_data: list, fin_data: dict, us_info_data: dict = None,
+                     states: dict = None) -> str:
     rows = []
     for s in stocks_data:
         market = s.get("market", "TW")
@@ -453,11 +573,27 @@ def build_stock_rows(stocks_data: list, fin_data: dict, us_info_data: dict = Non
         dist   = calc_distance(price, low, high) if (price and low) else "N/A"
         css    = f' class="{status}"' if status else ""
 
+        # 警告 badge（降級觸發指示）
+        st = (states or {}).get(code, {})
+        badge_html = ""
+        if st.get("tech_trigger_current"):
+            badge_html = '<span class="tech-warn-badge">技術↓</span>'
+        elif st.get("fund_trigger_current"):
+            since = st.get("fundamental_flag_since")
+            if since:
+                try:
+                    days = (datetime.now() - datetime.strptime(since, "%Y-%m-%d")).days
+                    badge_html = f'<span class="fund-warn-badge">⚠️ {days}d</span>'
+                except ValueError:
+                    badge_html = '<span class="fund-warn-badge">⚠️</span>'
+            else:
+                badge_html = '<span class="fund-warn-badge">⚠️</span>'
+
         # 代號 cell：可點擊展開 panel
         code_cell = (
             f'<span id="btn-{code}" class="code code-btn" '
             f'onclick="toggleFin(\'{code}\')">'
-            f'{code}<span class="arrow"> ▸</span></span>'
+            f'{code}{badge_html}<span class="arrow"> ▸</span></span>'
         )
 
         if market == "US":
@@ -485,7 +621,8 @@ def build_stock_rows(stocks_data: list, fin_data: dict, us_info_data: dict = Non
     return "\n".join(rows)
 
 
-def build_industry_sections(stocks_data: list, fin_data: dict, us_info_data: dict = None) -> str:
+def build_industry_sections(stocks_data: list, fin_data: dict,
+                            us_info_data: dict = None, states: dict = None) -> str:
     industries: dict = {}
     for s in stocks_data:
         ind = s.get("industry", "其他")
@@ -495,7 +632,7 @@ def build_industry_sections(stocks_data: list, fin_data: dict, us_info_data: dic
 
     sections = []
     for ind, stocks in industries.items():
-        rows  = build_stock_rows(stocks, fin_data, us_info_data)
+        rows  = build_stock_rows(stocks, fin_data, us_info_data, states)
         color = INDUSTRY_COLORS.get(ind, "#94a3b8")
         sections.append(f"""
 <section class="industry-section">
@@ -519,6 +656,22 @@ def build_industry_sections(stocks_data: list, fin_data: dict, us_info_data: dic
   </div>
 </section>""")
     return "\n".join(sections)
+
+
+def build_candidate_section(stocks_data: list, fin_data: dict,
+                            us_info_data: dict, states: dict) -> str:
+    if not stocks_data:
+        return ""
+    sections_html = build_industry_sections(stocks_data, fin_data, us_info_data, states)
+    note = (
+        '升回主名單：在 <code>downgrade_state.json</code> 將該代號加入 '
+        '<code>"manual_restore": true</code>，重跑 generate_html.py 生效。'
+    )
+    return (
+        f'<p class="candidate-title">候選區（降級觀察）— {len(stocks_data)} 檔</p>'
+        f'<div class="candidate-note">{note}</div>'
+        f'{sections_html}'
+    )
 
 
 def build_event_rows(events: list) -> str:
@@ -545,11 +698,15 @@ def build_event_rows(events: list) -> str:
 
 # ────────────── HTML 組裝 ──────────────
 
-def build_html(tw_stocks_data: list, us_stocks_data: list, events: list,
-               generated_at: str, fin_data: dict, us_info_data: dict) -> str:
-    tw_sections = build_industry_sections(tw_stocks_data, fin_data)
-    us_sections = build_industry_sections(us_stocks_data, fin_data, us_info_data)
-    event_rows  = build_event_rows(events)
+def build_html(tw_stocks_data: list, us_stocks_data: list,
+               tw_candidate_data: list, us_candidate_data: list,
+               events: list, generated_at: str,
+               fin_data: dict, us_info_data: dict, states: dict) -> str:
+    tw_sections       = build_industry_sections(tw_stocks_data, fin_data, states=states)
+    us_sections       = build_industry_sections(us_stocks_data, fin_data, us_info_data, states=states)
+    tw_candidate_html = build_candidate_section(tw_candidate_data, fin_data, None, states)
+    us_candidate_html = build_candidate_section(us_candidate_data, fin_data, us_info_data, states)
+    event_rows        = build_event_rows(events)
     fin_updated = ""
     if fin_data:
         try:
@@ -744,6 +901,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list, events: list,
   }}
 {FIN_CSS}
 {TAB_CSS}
+{CANDIDATE_CSS}
 </style>
 </head>
 <body>
@@ -807,6 +965,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list, events: list,
 
 <p class="section-title">觀察名單（美股）</p>
 {us_sections}
+{us_candidate_html}
 
 </div><!-- /tab-us -->
 
@@ -863,6 +1022,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list, events: list,
 
 <p class="section-title">觀察名單（台股）</p>
 {tw_sections}
+{tw_candidate_html}
 
 </div><!-- /tab-tw -->
 
@@ -949,8 +1109,35 @@ def main():
     events = load_event_log()
     print(f"\n  讀取事件日誌：{len(events)} 筆")
 
+    # ── M7：降級條件檢查 ──
+    print(f"\n  檢查降級條件（M7）...")
+    downgrade_states = load_downgrade_state()
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    for s in tw_stocks_data + us_stocks_data:
+        code   = s["code"]
+        market = s.get("market", "TW")
+        state  = downgrade_states.get(code, {"status": "watchlist"})
+        downgrade_states[code] = check_downgrade(
+            code, market, s.get("data", {}), fin_data, us_info_data, state, today_str
+        )
+        if downgrade_states[code].get("status") == "candidate":
+            print(f"  [{code}] → 候選區")
+    save_downgrade_state(downgrade_states)
+
+    tw_watchlist  = [s for s in tw_stocks_data
+                     if downgrade_states.get(s["code"], {}).get("status", "watchlist") == "watchlist"]
+    tw_candidates = [s for s in tw_stocks_data
+                     if downgrade_states.get(s["code"], {}).get("status", "watchlist") == "candidate"]
+    us_watchlist  = [s for s in us_stocks_data
+                     if downgrade_states.get(s["code"], {}).get("status", "watchlist") == "watchlist"]
+    us_candidates = [s for s in us_stocks_data
+                     if downgrade_states.get(s["code"], {}).get("status", "watchlist") == "candidate"]
+    print(f"  台股 主名單 {len(tw_watchlist)} / 候選區 {len(tw_candidates)}")
+    print(f"  美股 主名單 {len(us_watchlist)} / 候選區 {len(us_candidates)}")
+
     generated_at = datetime.now().strftime("%Y/%m/%d %H:%M")
-    html = build_html(tw_stocks_data, us_stocks_data, events, generated_at, fin_data, us_info_data)
+    html = build_html(tw_watchlist, us_watchlist, tw_candidates, us_candidates,
+                      events, generated_at, fin_data, us_info_data, downgrade_states)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)

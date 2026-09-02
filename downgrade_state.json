@@ -1,0 +1,365 @@
+{
+  "updated": "2026-09-02",
+  "states": {
+    "2330": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2454": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3711": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "5274": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6533": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2303": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2379": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6488": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2408": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "4966": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2382": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6669": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6230": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "3324": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2308": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3017": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2356": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3231": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2301": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2421": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3008": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "4938": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2474": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2354": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2317": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3034": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3037": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3044": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2360": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2385": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "2345": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "5388": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2332": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6277": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "4906": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3491": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6213": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3706": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "3085": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "4977": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "NVDA": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "MSFT": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "META": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "GOOGL": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "AMZN": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "AAPL": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "AMD": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "TSLA": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "ORCL": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "AVGO": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "ASML": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "AMAT": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "KLAC": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "LRCX": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "MU": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "MRVL": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "TXN": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "ON": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "QCOM": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "ARM": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    }
+  }
+}
