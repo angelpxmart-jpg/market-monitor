@@ -74,7 +74,8 @@
       "fund_trigger_current": false
     },
     "6230": {
-      "status": "candidate",
+      "status": "watchlist",
+      "manual_restore": true,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
@@ -116,12 +117,6 @@
       "fund_trigger_current": false
     },
     "2421": {
-      "status": "watchlist",
-      "fundamental_flag_since": null,
-      "tech_trigger_current": false,
-      "fund_trigger_current": false
-    },
-    "3008": {
       "status": "watchlist",
       "fundamental_flag_since": null,
       "tech_trigger_current": false,
@@ -176,7 +171,8 @@
       "fund_trigger_current": false
     },
     "2385": {
-      "status": "candidate",
+      "status": "watchlist",
+      "manual_restore": true,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
@@ -217,12 +213,6 @@
       "tech_trigger_current": false,
       "fund_trigger_current": false
     },
-    "6213": {
-      "status": "watchlist",
-      "fundamental_flag_since": null,
-      "tech_trigger_current": false,
-      "fund_trigger_current": false
-    },
     "3706": {
       "status": "watchlist",
       "fundamental_flag_since": null,
@@ -254,7 +244,8 @@
       "fund_trigger_current": false
     },
     "META": {
-      "status": "candidate",
+      "status": "watchlist",
+      "manual_restore": true,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
@@ -284,13 +275,15 @@
       "fund_trigger_current": false
     },
     "TSLA": {
-      "status": "candidate",
+      "status": "watchlist",
+      "manual_restore": true,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "ORCL": {
-      "status": "candidate",
+      "status": "watchlist",
+      "manual_restore": true,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
