@@ -67,6 +67,22 @@ FIN_CSS = """
     font-size: 11px; margin-bottom: 8px;
   }
   .arrow { font-style: normal; }
+  /* ── 財報 panel 深色背景覆蓋 ── */
+  .fin-panel { border-top: 1px solid rgba(253,240,213,0.12); }
+  .fin-panel .fin-hd  { color: #669BBC; }
+  .fin-panel .fin-stat { color: #FDF0D5; }
+  .fin-panel .fin-qs  { color: rgba(253,240,213,0.5); }
+  .fin-panel .fin-muted { color: rgba(253,240,213,0.4); }
+  .fin-panel .fin-empty { color: rgba(253,240,213,0.5); }
+  .fin-panel .fin-unk  { color: rgba(253,240,213,0.4); }
+  .fin-panel .fin-pass { color: #4ade80; }
+  .fin-panel .fin-fail { color: #f87171; }
+  .fin-panel .fin-warn { color: #fbbf24; }
+  .fin-panel .fn-buy  { color: #4ade80; }
+  .fin-panel .fn-sell { color: #f87171; }
+  .fin-panel .fin-tbl th,
+  .fin-panel .fin-tbl td { border-color: rgba(253,240,213,0.15); }
+  .fin-panel .fin-seg-warn { background: rgba(180,83,9,.25); color: #fbbf24; }
 """
 
 # ── 候選區 CSS ──
@@ -79,8 +95,8 @@ CANDIDATE_CSS = """
   }
   .candidate-note {
     font-size: 11px; color: var(--muted);
-    background: rgba(220,38,38,.04);
-    border: 1px solid rgba(220,38,38,.18);
+    background: rgba(120,0,0,.04);
+    border: 1px solid rgba(120,0,0,.18);
     border-radius: 6px;
     padding: 7px 12px;
     margin-bottom: 12px;
@@ -94,7 +110,7 @@ CANDIDATE_CSS = """
   .tech-warn-badge {
     display: inline-block; font-size: 9px; font-weight: 700;
     padding: 1px 4px; border-radius: 3px;
-    background: rgba(220,38,38,.12); color: var(--red);
+    background: rgba(120,0,0,.12); color: var(--red);
     margin-left: 3px; vertical-align: middle;
   }
   .fund-warn-badge {
@@ -664,8 +680,9 @@ def build_candidate_section(stocks_data: list, fin_data: dict,
         return ""
     sections_html = build_industry_sections(stocks_data, fin_data, us_info_data, states)
     note = (
-        '升回主名單：在 <code>downgrade_state.json</code> 將該代號加入 '
-        '<code>"manual_restore": true</code>，重跑 generate_html.py 生效。'
+        '此區股票已自動觸發降級條件（技術面 或 基本面持續 14 天）。'
+        '確認回升後，在 <code>downgrade_state.json</code> 將該代號的 '
+        '<code>manual_restore</code> 設為 <code>true</code>，重跑腳本即升回主名單。'
     )
     return (
         f'<p class="candidate-title">候選區（降級觀察）— {len(stocks_data)} 檔</p>'
@@ -721,20 +738,20 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23f8f3ec'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%238b6435' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%238b6435'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23003049'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23C1121F' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23C1121F'/%3E%3C/svg%3E">
 <title>美股下殺台股觀察</title>
 <style>
   :root {{
-    --bg:        #fdfcf9;
+    --bg:        #FDF0D5;
     --card:      #ffffff;
-    --header-bg: #f8f3ec;
-    --border:    #ede8df;
-    --text:      #2c231a;
-    --muted:     #9e8f7e;
+    --header-bg: #003049;
+    --border:    rgba(0,48,73,0.15);
+    --text:      #003049;
+    --muted:     #669BBC;
     --green:     #15803d;
     --amber:     #b45309;
-    --red:       #dc2626;
-    --accent:    #8b6435;
+    --red:       #780000;
+    --accent:    #C1121F;
   }}
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{
@@ -772,7 +789,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
     display: flex; align-items: center; gap: 8px;
     padding: 10px 14px;
     background: var(--header-bg);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(253,240,213,0.12);
   }}
   .industry-dot {{
     width: 8px; height: 8px;
@@ -780,10 +797,10 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
   }}
   .industry-name {{
     font-size: 13px; font-weight: 700;
-    color: var(--text); letter-spacing: .2px;
+    color: #FDF0D5; letter-spacing: .2px;
   }}
   .industry-count {{
-    font-size: 12px; color: var(--muted); margin-left: auto;
+    font-size: 12px; color: rgba(253,240,213,0.55); margin-left: auto;
   }}
   .table-wrap {{ overflow-x: auto; }}
 
@@ -805,7 +822,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
   }}
   td:first-child, td:nth-child(2) {{ text-align: left; }}
   tr:last-child td {{ border-bottom: none; }}
-  tr:hover td {{ background: #faf6f0; }}
+  tr:hover td {{ background: rgba(0,48,73,0.04); }}
   tr.in-zone td {{ background: rgba(22,163,74,.07); }}
   tr.in-zone td:first-child {{ border-left: 3px solid var(--green); }}
   tr.near-zone td {{ background: rgba(180,83,9,.06); }}
@@ -885,7 +902,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
     padding: 2px 7px; border-radius: 4px;
     white-space: nowrap;
   }}
-  .exit-badge.stop-loss  {{ background: rgba(220,38,38,.1);  color: var(--red); }}
+  .exit-badge.stop-loss  {{ background: rgba(120,0,0,.1);  color: var(--red); }}
   .exit-badge.take-profit {{ background: rgba(21,128,61,.1);  color: var(--green); }}
   .exit-rule {{ color: var(--muted); font-size: 12px; }}
 
