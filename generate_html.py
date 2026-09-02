@@ -429,13 +429,13 @@ def parse_target(target_str: str):
 
 def calc_distance(price: float, low: float, high: float) -> str:
     if low <= price <= high:
-        return "✅ 在目標區"
+        return '<span class="dist-in">在目標區</span>'
     elif price > high:
         dist = round((price - high) / high * 100, 1)
-        return f"-{dist}%（偏高）"
+        return f'<span class="dist-high">高出 {dist}%</span>'
     else:
         dist = round((low - price) / low * 100, 1)
-        return f"+{dist}%（尚早）"
+        return f'<span class="dist-low">低於 {dist}%</span>'
 
 
 def row_status(price: float, low, high) -> str:
@@ -839,6 +839,9 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
     padding: 24px; font-style: italic;
   }}
   .dist-cell {{ font-size: 13px; }}
+  .dist-in   {{ color: var(--green); font-weight: 600; }}
+  .dist-high {{ color: var(--muted); }}
+  .dist-low  {{ color: var(--amber); }}
   .target-cell {{ font-size: 13px; color: var(--muted); }}
   .slope-up   {{ color: var(--green); font-weight: 700; }}
   .slope-flat {{ color: var(--muted); }}
