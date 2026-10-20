@@ -451,6 +451,11 @@ def fetch_stock_data(ticker: str) -> dict:
                            progress=False, auto_adjust=True)
         if hist.empty or len(hist) < 2:
             return {}
+        # 台股排程在開盤後跑，盤中K棒的價格與量能不完整；收盤（14:00）前一律以昨收判斷
+        now = datetime.now()
+        if (ticker.endswith((".TW", ".TWO")) and hist.index[-1].date() == now.date()
+                and now.hour < 14):
+            hist = hist.iloc[:-1]
         close  = hist["Close"].squeeze().dropna()
         volume = hist["Volume"].squeeze().dropna()
         price = round(float(close.iat[-1]), 1)
@@ -471,11 +476,7 @@ def fetch_stock_data(ticker: str) -> dict:
             avg_vol20 = float(volume.tail(20).mean())
             vol_ok = today_vol >= avg_vol20 * 0.8
 
-        # 台股排程在開盤後跑，當天K棒是盤中資料；昨日漲跌要用前兩根完整收盤
-        done = close
-        if ticker.endswith((".TW", ".TWO")) and close.index[-1].date() == datetime.now().date():
-            done = close.iloc[:-1]
-        chg_pct = round((float(done.iat[-1]) / float(done.iat[-2]) - 1) * 100, 1) if len(done) >= 2 else None
+        chg_pct = round((float(close.iat[-1]) / float(close.iat[-2]) - 1) * 100, 1)
 
         return {"price": price, "ma60": ma60, "ma120": ma120,
                 "slope": slope, "vol_ok": vol_ok, "chg_pct": chg_pct}
@@ -851,7 +852,7 @@ def build_industry_sections(stocks_data: list, fin_data: dict,
     <table>
       <thead>
         <tr>
-          <th>代號</th><th>名稱</th><th>現價</th>
+          <th>代號</th><th>名稱</th><th>昨收</th>
           <th>MA60</th><th>MA120</th>
           <th>趨勢</th><th>量能</th>
           <th>觀察目標區</th><th>進場訊號</th><th>距目標區</th>
