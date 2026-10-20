@@ -4,266 +4,344 @@
     "ticker": "2330.TW",
     "name": "台積電",
     "industry": "AI/半導體",
-    "target": "1901~2125"
+    "target": "1994~2229",
+    "desc": "全球最大晶圓代工廠，幫蘋果、輝達代工晶片"
   },
   {
     "code": "2454",
     "ticker": "2454.TW",
     "name": "聯發科",
     "industry": "AI/半導體",
-    "target": "2804~3134"
+    "target": "3336~3729",
+    "desc": "手機晶片設計大廠，也做 AI 與車用晶片"
   },
   {
     "code": "3711",
     "ticker": "3711.TW",
     "name": "日月光投控",
     "industry": "AI/半導體",
-    "target": "457~511"
+    "target": "507~566",
+    "desc": "全球最大的半導體封裝測試廠"
   },
   {
     "code": "5274",
     "ticker": "5274.TWO",
     "name": "信驊",
     "industry": "AI/半導體",
-    "target": "12240~13680"
+    "target": "13647~15253",
+    "desc": "伺服器遠端管理晶片（BMC）全球龍頭"
   },
   {
     "code": "6533",
     "ticker": "6533.TW",
     "name": "矽力-KY",
     "industry": "AI/半導體",
-    "target": "185~207"
+    "target": "200~223",
+    "desc": "電源管理晶片設計"
   },
   {
     "code": "2303",
     "ticker": "2303.TW",
     "name": "聯電",
     "industry": "AI/半導體",
-    "target": "94~105"
+    "target": "109~121",
+    "desc": "晶圓代工廠，主攻成熟製程"
   },
   {
     "code": "2379",
     "ticker": "2379.TW",
     "name": "瑞昱",
     "industry": "AI/半導體",
-    "target": "545~609"
+    "target": "569~636",
+    "desc": "網路、Wi-Fi 與音效晶片設計"
   },
   {
     "code": "6488",
     "ticker": "6488.TWO",
     "name": "環球晶",
     "industry": "AI/半導體",
-    "target": "704~787"
-  },
-  {
-    "code": "2408",
-    "ticker": "2408.TW",
-    "name": "南亞科",
-    "industry": "AI/半導體",
-    "target": "300~335"
+    "target": "795~888",
+    "desc": "矽晶圓（做晶片的原料）大廠"
   },
   {
     "code": "4966",
     "ticker": "4966.TWO",
     "name": "譜瑞-KY",
     "industry": "AI/半導體",
-    "target": "518~579"
+    "target": "530~592",
+    "desc": "高速傳輸介面晶片（螢幕、USB 訊號傳輸）"
+  },
+  {
+    "code": "2408",
+    "ticker": "2408.TW",
+    "name": "南亞科",
+    "industry": "記憶體/儲存",
+    "target": "347~388",
+    "desc": "DRAM 記憶體製造（台塑集團）"
+  },
+  {
+    "code": "2344",
+    "ticker": "2344.TW",
+    "name": "華邦電",
+    "industry": "記憶體/儲存",
+    "target": "135~151",
+    "desc": "利基型 DRAM 與 Flash 記憶體"
+  },
+  {
+    "code": "2337",
+    "ticker": "2337.TW",
+    "name": "旺宏",
+    "industry": "記憶體/儲存",
+    "target": "117~131",
+    "desc": "NOR／NAND Flash 記憶體"
+  },
+  {
+    "code": "8299",
+    "ticker": "8299.TWO",
+    "name": "群聯",
+    "industry": "記憶體/儲存",
+    "target": "1824~2039",
+    "desc": "隨身碟、SSD 用的記憶體控制晶片"
+  },
+  {
+    "code": "6770",
+    "ticker": "6770.TW",
+    "name": "力積電",
+    "industry": "記憶體/儲存",
+    "target": "58~65",
+    "desc": "記憶體與晶圓代工"
+  },
+  {
+    "code": "6239",
+    "ticker": "6239.TW",
+    "name": "力成",
+    "industry": "記憶體/儲存",
+    "target": "238~266",
+    "desc": "記憶體封裝測試大廠"
   },
   {
     "code": "2382",
     "ticker": "2382.TW",
     "name": "廣達",
     "industry": "伺服器/散熱/電源",
-    "target": "273~305"
+    "target": "282~315",
+    "desc": "筆電與 AI 伺服器代工大廠"
   },
   {
     "code": "6669",
     "ticker": "6669.TW",
     "name": "緯穎",
     "industry": "伺服器/散熱/電源",
-    "target": "1377~1539"
+    "target": "1580~1766",
+    "desc": "雲端資料中心伺服器（緯創子公司）"
   },
   {
     "code": "6230",
     "ticker": "6230.TW",
     "name": "超眾",
     "industry": "伺服器/散熱/電源",
-    "target": "115~128"
+    "target": "107~120",
+    "desc": "電腦散熱模組（熱導管）"
   },
   {
     "code": "3324",
     "ticker": "3324.TWO",
     "name": "双鴻",
     "industry": "伺服器/散熱/電源",
-    "target": "861~962"
+    "target": "943~1053",
+    "desc": "散熱模組，含 AI 伺服器水冷"
   },
   {
     "code": "2308",
     "ticker": "2308.TW",
     "name": "台達電",
     "industry": "伺服器/散熱/電源",
-    "target": "1604~1792"
+    "target": "1656~1850",
+    "desc": "電源供應器、資料中心電源與散熱"
   },
   {
     "code": "3017",
     "ticker": "3017.TW",
     "name": "奇鋐",
     "industry": "伺服器/散熱/電源",
-    "target": "2107~2355"
+    "target": "2335~2610",
+    "desc": "散熱模組與伺服器散熱"
   },
   {
     "code": "2356",
     "ticker": "2356.TW",
     "name": "英業達",
     "industry": "伺服器/散熱/電源",
-    "target": "48~54"
+    "target": "52~58",
+    "desc": "伺服器與筆電代工"
   },
   {
     "code": "3231",
     "ticker": "3231.TW",
     "name": "緯創",
     "industry": "伺服器/散熱/電源",
-    "target": "128~143"
+    "target": "138~154",
+    "desc": "筆電與 AI 伺服器代工"
   },
   {
     "code": "2301",
     "ticker": "2301.TW",
     "name": "光寶科",
     "industry": "伺服器/散熱/電源",
-    "target": "176~196"
+    "target": "198~222",
+    "desc": "電源供應器與光電零組件"
   },
   {
     "code": "2421",
     "ticker": "2421.TW",
     "name": "建準",
     "industry": "伺服器/散熱/電源",
-    "target": "121~135"
+    "target": "126~141",
+    "desc": "散熱風扇與精密馬達"
   },
   {
     "code": "4938",
     "ticker": "4938.TW",
     "name": "和碩",
     "industry": "蘋果供應鏈",
-    "target": "70~78"
+    "target": "72~81",
+    "desc": "iPhone 等電子產品組裝代工"
   },
   {
     "code": "2474",
     "ticker": "2474.TW",
     "name": "可成",
     "industry": "蘋果供應鏈",
-    "target": "166~186"
+    "target": "170~190",
+    "desc": "筆電、手機的金屬機殼"
   },
   {
     "code": "2354",
     "ticker": "2354.TW",
     "name": "鴻準",
     "industry": "蘋果供應鏈",
-    "target": "47~53"
+    "target": "50~56",
+    "desc": "金屬機殼與散熱模組（鴻海集團）"
   },
   {
     "code": "2317",
     "ticker": "2317.TW",
     "name": "鴻海",
     "industry": "蘋果供應鏈",
-    "target": "201~224"
+    "target": "210~235",
+    "desc": "全球最大電子代工廠，組裝 iPhone 與 AI 伺服器"
   },
   {
     "code": "3034",
     "ticker": "3034.TW",
     "name": "聯詠",
     "industry": "蘋果供應鏈",
-    "target": "391~437"
+    "target": "421~470",
+    "desc": "面板驅動晶片設計"
   },
   {
     "code": "3037",
     "ticker": "3037.TW",
     "name": "欣興",
     "industry": "蘋果供應鏈",
-    "target": "718~803"
+    "target": "806~901",
+    "desc": "IC 載板與電路板（PCB）"
   },
   {
     "code": "3044",
     "ticker": "3044.TW",
     "name": "健鼎",
     "industry": "蘋果供應鏈",
-    "target": "373~417"
+    "target": "401~448",
+    "desc": "印刷電路板（PCB）"
   },
   {
     "code": "2360",
     "ticker": "2360.TW",
     "name": "致茂",
     "industry": "蘋果供應鏈",
-    "target": "1736~1940"
+    "target": "1835~2050",
+    "desc": "電子量測與自動化測試設備"
   },
   {
     "code": "2385",
     "ticker": "2385.TW",
     "name": "群光",
     "industry": "蘋果供應鏈",
-    "target": "97~109"
+    "target": "96~107",
+    "desc": "筆電鍵盤、電源與鏡頭模組"
   },
   {
     "code": "2345",
     "ticker": "2345.TW",
     "name": "智邦",
     "industry": "網通",
-    "target": "1854~2072"
+    "target": "1910~2135",
+    "desc": "資料中心網路交換器"
   },
   {
     "code": "5388",
     "ticker": "5388.TW",
     "name": "中磊",
     "industry": "網通",
-    "target": "70~78"
+    "target": "69~77",
+    "desc": "寬頻網路設備（數據機、路由器）"
   },
   {
     "code": "2332",
     "ticker": "2332.TW",
     "name": "友訊",
     "industry": "網通",
-    "target": "15~17"
+    "target": "16~18",
+    "desc": "D-Link 網路設備品牌"
   },
   {
     "code": "6277",
     "ticker": "6277.TW",
     "name": "宏正",
     "industry": "網通",
-    "target": "61~68"
+    "target": "63~71",
+    "desc": "KVM 切換器（一套鍵盤螢幕控制多台電腦）"
   },
   {
     "code": "4906",
     "ticker": "4906.TW",
     "name": "正文",
     "industry": "網通",
-    "target": "32~36"
+    "target": "33~37",
+    "desc": "網通設備代工（Wi-Fi、5G 小型基地台）"
   },
   {
     "code": "3491",
     "ticker": "3491.TWO",
-    "name": "昇銳",
+    "name": "昇達科",
     "industry": "網通",
-    "target": "1274~1424"
+    "target": "1270~1419",
+    "desc": "微波通訊元件，用於低軌衛星與基地台"
   },
   {
     "code": "3706",
     "ticker": "3706.TW",
     "name": "神達",
     "industry": "網通",
-    "target": "73~82"
+    "target": "66~74",
+    "desc": "伺服器與車用電子"
   },
   {
-    "code": "3085",
-    "ticker": "3085.TWO",
+    "code": "3617",
+    "ticker": "3617.TW",
     "name": "碩天",
     "industry": "網通",
-    "target": "10~12"
+    "target": "13~15",
+    "desc": "不斷電系統（UPS）與電源保護設備"
   },
   {
     "code": "4977",
     "ticker": "4977.TW",
     "name": "眾達-KY",
     "industry": "網通",
-    "target": "152~170"
+    "target": "150~168",
+    "desc": "光纖通訊的光收發模組"
   },
   {
     "code": "NVDA",
@@ -271,7 +349,8 @@
     "name": "NVIDIA",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "AI 晶片（GPU）龍頭"
   },
   {
     "code": "MSFT",
@@ -279,7 +358,8 @@
     "name": "Microsoft",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "Windows、Office 與 Azure 雲端"
   },
   {
     "code": "META",
@@ -287,7 +367,8 @@
     "name": "Meta",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "Facebook、Instagram 的母公司"
   },
   {
     "code": "GOOGL",
@@ -295,7 +376,8 @@
     "name": "Alphabet",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "Google 搜尋、YouTube 的母公司"
   },
   {
     "code": "AMZN",
@@ -303,7 +385,8 @@
     "name": "Amazon",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "電商與 AWS 雲端"
   },
   {
     "code": "AAPL",
@@ -311,7 +394,8 @@
     "name": "Apple",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "iPhone、Mac"
   },
   {
     "code": "AMD",
@@ -319,7 +403,8 @@
     "name": "AMD",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "電腦處理器與 AI 晶片，輝達的對手"
   },
   {
     "code": "TSLA",
@@ -327,7 +412,8 @@
     "name": "Tesla",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "電動車，也做自駕與機器人"
   },
   {
     "code": "ORCL",
@@ -335,7 +421,8 @@
     "name": "Oracle",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "資料庫軟體與雲端資料中心"
   },
   {
     "code": "AVGO",
@@ -343,7 +430,8 @@
     "name": "Broadcom",
     "industry": "AI/科技核心",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "網通晶片與客製化 AI 晶片"
   },
   {
     "code": "ASML",
@@ -351,7 +439,8 @@
     "name": "ASML",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "全球唯一的 EUV 曝光機（先進製程必備設備）供應商"
   },
   {
     "code": "AMAT",
@@ -359,7 +448,8 @@
     "name": "Applied Materials",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "全球最大的半導體設備商"
   },
   {
     "code": "KLAC",
@@ -367,7 +457,8 @@
     "name": "KLA Corp",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "晶片檢測與量測設備"
   },
   {
     "code": "LRCX",
@@ -375,15 +466,8 @@
     "name": "Lam Research",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
-  },
-  {
-    "code": "MU",
-    "ticker": "MU",
-    "name": "Micron",
-    "industry": "半導體供應鏈",
-    "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "晶片蝕刻、薄膜沉積設備"
   },
   {
     "code": "MRVL",
@@ -391,7 +475,8 @@
     "name": "Marvell",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "資料中心網通與客製化晶片"
   },
   {
     "code": "TXN",
@@ -399,7 +484,8 @@
     "name": "Texas Instruments",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "類比晶片、電源管理晶片"
   },
   {
     "code": "ON",
@@ -407,7 +493,8 @@
     "name": "onsemi",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "車用與工業用功率半導體"
   },
   {
     "code": "QCOM",
@@ -415,7 +502,8 @@
     "name": "Qualcomm",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "手機處理器（Snapdragon）"
   },
   {
     "code": "ARM",
@@ -423,6 +511,43 @@
     "name": "ARM Holdings",
     "industry": "半導體供應鏈",
     "market": "US",
-    "target": ""
+    "target": "",
+    "desc": "晶片架構授權，手機晶片幾乎都用它的設計"
+  },
+  {
+    "code": "MU",
+    "ticker": "MU",
+    "name": "Micron",
+    "industry": "記憶體/儲存",
+    "market": "US",
+    "target": "",
+    "desc": "美國記憶體大廠（DRAM、AI 用的 HBM）"
+  },
+  {
+    "code": "SNDK",
+    "ticker": "SNDK",
+    "name": "SanDisk",
+    "industry": "記憶體/儲存",
+    "market": "US",
+    "target": "",
+    "desc": "NAND Flash 記憶體與 SSD"
+  },
+  {
+    "code": "WDC",
+    "ticker": "WDC",
+    "name": "Western Digital",
+    "industry": "記憶體/儲存",
+    "market": "US",
+    "target": "",
+    "desc": "傳統硬碟（HDD）"
+  },
+  {
+    "code": "STX",
+    "ticker": "STX",
+    "name": "Seagate",
+    "industry": "記憶體/儲存",
+    "market": "US",
+    "target": "",
+    "desc": "傳統硬碟（HDD）"
   }
 ]

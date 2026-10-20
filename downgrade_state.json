@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02",
+  "updated": "2026-10-20",
   "states": {
     "2330": {
       "status": "watchlist",
@@ -56,9 +56,9 @@
       "fund_trigger_current": false
     },
     "4966": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "2382": {
@@ -74,8 +74,8 @@
       "fund_trigger_current": false
     },
     "6230": {
-      "status": "watchlist",
-      "manual_restore": true,
+      "status": "candidate",
+      "manual_restore": false,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
@@ -87,9 +87,9 @@
       "fund_trigger_current": false
     },
     "2308": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "3017": {
@@ -129,9 +129,9 @@
       "fund_trigger_current": false
     },
     "2474": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "2354": {
@@ -171,22 +171,22 @@
       "fund_trigger_current": false
     },
     "2385": {
-      "status": "watchlist",
-      "manual_restore": true,
+      "status": "candidate",
+      "manual_restore": false,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "2345": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "5388": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "2332": {
@@ -208,9 +208,9 @@
       "fund_trigger_current": false
     },
     "3491": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "3706": {
@@ -220,15 +220,15 @@
       "fund_trigger_current": false
     },
     "3085": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
       "tech_trigger_current": false,
       "fund_trigger_current": false
     },
     "4977": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "NVDA": {
@@ -244,10 +244,10 @@
       "fund_trigger_current": false
     },
     "META": {
-      "status": "watchlist",
-      "manual_restore": true,
+      "status": "candidate",
+      "manual_restore": false,
       "fundamental_flag_since": null,
-      "tech_trigger_current": true,
+      "tech_trigger_current": false,
       "fund_trigger_current": false
     },
     "GOOGL": {
@@ -275,23 +275,23 @@
       "fund_trigger_current": false
     },
     "TSLA": {
-      "status": "watchlist",
-      "manual_restore": true,
+      "status": "candidate",
+      "manual_restore": false,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "ORCL": {
-      "status": "watchlist",
-      "manual_restore": true,
+      "status": "candidate",
+      "manual_restore": false,
       "fundamental_flag_since": null,
       "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "AVGO": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "ASML": {
@@ -307,9 +307,9 @@
       "fund_trigger_current": false
     },
     "KLAC": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "LRCX": {
@@ -337,9 +337,9 @@
       "fund_trigger_current": false
     },
     "ON": {
-      "status": "watchlist",
+      "status": "candidate",
       "fundamental_flag_since": null,
-      "tech_trigger_current": false,
+      "tech_trigger_current": true,
       "fund_trigger_current": false
     },
     "QCOM": {
@@ -349,6 +349,60 @@
       "fund_trigger_current": false
     },
     "ARM": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2344": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "2337": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "8299": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6770": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "6239": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "SNDK": {
+      "status": "watchlist",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": false,
+      "fund_trigger_current": false
+    },
+    "WDC": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "STX": {
+      "status": "candidate",
+      "fundamental_flag_since": null,
+      "tech_trigger_current": true,
+      "fund_trigger_current": false
+    },
+    "3617": {
       "status": "watchlist",
       "fundamental_flag_since": null,
       "tech_trigger_current": false,

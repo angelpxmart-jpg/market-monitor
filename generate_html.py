@@ -10,6 +10,7 @@ import yfinance as yf
 import json
 import os
 from datetime import datetime
+from html import escape as html_escape
 
 BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
 CONFIG_FILE    = os.path.join(BASE_DIR, "stocks_config.json")
@@ -17,6 +18,9 @@ LOG_FILE       = os.path.join(BASE_DIR, "event_log.json")
 OUTPUT_FILE    = os.path.join(BASE_DIR, "index.html")
 FINANCIAL_FILE  = os.path.join(BASE_DIR, "financial_data.json")
 DOWNGRADE_FILE  = os.path.join(BASE_DIR, "downgrade_state.json")
+MAIL_SUMMARY_FILE = os.path.join(BASE_DIR, "mail_summary.json")
+# Anthropic key 與盤後摘要（market digest）共用同一份 .env
+DIGEST_ENV = os.path.join(os.path.dirname(BASE_DIR), "daily-market-digest", ".env")
 
 INDUSTRY_COLORS = {
     "AI/半導體":        "#6366f1",
@@ -25,6 +29,7 @@ INDUSTRY_COLORS = {
     "網通":             "#f59e0b",
     "AI/科技核心":      "#7c3aed",
     "半導體供應鏈":     "#0891b2",
+    "記憶體/儲存":      "#e11d48",
 }
 
 # ── M5 財報 panel CSS（插入 <style> 內）──
@@ -167,6 +172,61 @@ function switchTab(tab) {
 
 # ────────────── 美股 yfinance .info 抓取 ──────────────
 
+RATING_ZH = {"strong_buy": "強力買進", "buy": "買進", "hold": "持有",
+             "underperform": "弱於大盤", "sell": "賣出", "strong_sell": "強力賣出"}
+
+
+def extract_analyst(info: dict) -> dict:
+    return {
+        "mean":   info.get("targetMeanPrice"),
+        "low":    info.get("targetLowPrice"),
+        "high":   info.get("targetHighPrice"),
+        "count":  info.get("numberOfAnalystOpinions"),
+        "rating": info.get("recommendationKey"),
+    }
+
+
+def fetch_analyst(ticker: str) -> dict:
+    try:
+        return extract_analyst(yf.Ticker(ticker).info)
+    except Exception as e:
+        print(f"  [{ticker}] 法人預估抓取失敗：{e}")
+        return {}
+
+
+def analyst_block_html(a: dict, price) -> str:
+    a = a or {}
+    mean, count = a.get("mean"), a.get("count")
+    if mean is None:
+        return ('<div class="fin-block"><div class="fin-hd">法人預估</div>'
+                '<div class="fin-stat fin-muted">無法人預估資料</div></div>')
+
+    few = not count or count < 5
+    hd = f'法人預估（{count or 0} 位）'
+    if few:
+        hd += ' <span class="fin-muted">樣本少，僅供參考</span>'
+    if price:
+        up = (mean - price) / price * 100
+        up_html = f'<span class="{"fin-pass" if up >= 0 else "fin-fail"}">{up:+.1f}%</span>'
+    else:
+        up_html = "—"
+    if few:
+        up_html = f'<span class="fin-muted">{up:+.1f}%</span>' if price else "—"
+    lo, hi = a.get("low"), a.get("high")
+    rng = f"{lo:,.0f} ~ {hi:,.0f}" if (lo is not None and hi is not None) else "—"
+    rating = RATING_ZH.get(a.get("rating"), "—")
+    stat = "fin-stat fin-muted" if few else "fin-stat"
+    return (
+        f'<div class="fin-block">'
+        f'<div class="fin-hd">{hd}</div>'
+        f'<div class="{stat}">均價 {mean:,.2f}</div>'
+        f'<div class="{stat}">上檔空間 {up_html}</div>'
+        f'<div class="{stat}">區間 {rng}</div>'
+        f'<div class="{stat}">評等 {rating}</div>'
+        f'</div>'
+    )
+
+
 def fetch_us_stock_info(ticker: str) -> dict:
     try:
         info = yf.Ticker(ticker).info
@@ -178,13 +238,14 @@ def fetch_us_stock_info(ticker: str) -> dict:
             "trailing_pe":     info.get("trailingPE"),
             "de_ratio":        info.get("debtToEquity"),
             "current_ratio":   info.get("currentRatio"),
+            "analyst":         extract_analyst(info),
         }
     except Exception as e:
         print(f"  [{ticker}] .info 抓取失敗：{e}")
         return {}
 
 
-def us_fin_panel_html(code: str, info: dict) -> str:
+def us_fin_panel_html(code: str, info: dict, extra: str = "") -> str:
     if not info:
         return ('<div class="fin-panel"><p class="fin-empty">'
                 'yfinance .info 資料尚未載入</p></div>')
@@ -239,6 +300,7 @@ def us_fin_panel_html(code: str, info: dict) -> str:
         f'<div class="fin-hd">機構持股 {_badge(inst_ok)}</div>'
         f'<div class="fin-stat">{_pct(inst_pct)}</div>'
         f'</div>'
+        f'{extra}'
         f'</div></div>'
     )
 
@@ -271,11 +333,11 @@ def _valbadge(v, good_fn) -> str:
     return f"{v} {badge}"
 
 
-def fin_panel_html(code: str, fin) -> str:
+def fin_panel_html(code: str, fin, extra: str = "") -> str:
     if not fin:
         return ('<div class="fin-panel"><p class="fin-empty">'
                 '財報資料尚未載入，請執行：<code>python3 fetch_financials.py</code>'
-                '</p></div>')
+                f'</p><div class="fin-grid">{extra}</div></div>')
 
     seg = ('<span class="fin-seg-warn">⚠️ 相關營收佔比 ≥40% 待人工確認</span>'
            if fin.get("segment_warning") else "")
@@ -376,6 +438,7 @@ def fin_panel_html(code: str, fin) -> str:
         f'<div class="fin-stat">{net5_html}</div>'
         f'</div>'
 
+        f'{extra}'
         f'</div></div>'
     )
 
@@ -408,14 +471,31 @@ def fetch_stock_data(ticker: str) -> dict:
             avg_vol20 = float(volume.tail(20).mean())
             vol_ok = today_vol >= avg_vol20 * 0.8
 
+        # 台股排程在開盤後跑，當天K棒是盤中資料；昨日漲跌要用前兩根完整收盤
+        done = close
+        if ticker.endswith((".TW", ".TWO")) and close.index[-1].date() == datetime.now().date():
+            done = close.iloc[:-1]
+        chg_pct = round((float(done.iat[-1]) / float(done.iat[-2]) - 1) * 100, 1) if len(done) >= 2 else None
+
         return {"price": price, "ma60": ma60, "ma120": ma120,
-                "slope": slope, "vol_ok": vol_ok}
+                "slope": slope, "vol_ok": vol_ok, "chg_pct": chg_pct}
     except Exception as e:
         print(f"  [{ticker}] 抓取失敗：{e}")
         return {}
 
 
 # ────────────── 工具函數 ──────────────
+
+def calc_target(s: dict, ma120) -> str:
+    """每日依 MA120 動態計算目標區：美股 ×0.80~0.95、台股 ×0.85~0.95；無 MA120 時退回設定檔值"""
+    if not ma120:
+        return s.get("target", "")
+    if s.get("market") == "US":
+        return f"{ma120 * 0.80:.2f}~{ma120 * 0.95:.2f}"
+    lo, hi = ma120 * 0.85, ma120 * 0.95
+    fmt = ".0f" if lo >= 100 else ".1f"
+    return f"{lo:{fmt}}~{hi:{fmt}}"
+
 
 def parse_target(target_str: str):
     if not target_str or "~" not in target_str:
@@ -452,6 +532,116 @@ def row_status(price: float, low, high) -> str:
     if (low - price) / low * 100 <= 10:
         return "near-zone"
     return ""
+
+
+def fetch_sox_change():
+    try:
+        close = yf.download("^SOX", period="5d", interval="1d",
+                            progress=False, auto_adjust=True)["Close"].squeeze().dropna()
+        if len(close) < 2:
+            return None
+        return round((float(close.iat[-1]) / float(close.iat[-2]) - 1) * 100, 2)
+    except Exception as e:
+        print(f"  SOX 抓取失敗：{e}")
+        return None
+
+
+def load_anthropic_key() -> str:
+    key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not key and os.path.exists(DIGEST_ENV):
+        with open(DIGEST_ENV, encoding="utf-8") as f:
+            for line in f:
+                if line.strip().startswith("ANTHROPIC_API_KEY="):
+                    key = line.split("=", 1)[1].strip().strip('"').strip("'")
+    return key
+
+
+BRIEFING_SYSTEM = """你是幫非金融背景的上班族解讀「美股下殺台股觀察名單」的助理。讀者不認識這些公司，也看不懂技術指標。
+
+請根據提供的數據，寫一段 4–6 句的繁體中文解說，內容依序是：
+1. 昨日整體氣氛：SOX（費城半導體指數，代表美國晶片股整體表現）漲跌多少，名單整體偏漲或偏跌，哪個產業族群動得最明顯。
+2. 值得注意的股票：先講「可進場」的股票；若沒有，講「價位到」但還缺條件的股票，說明缺什麼。提到股票時用「名稱（一句話說它做什麼）」的方式介紹。
+3. 一句話總結今天可以優先看哪幾檔，或「今天沒有符合條件的，繼續觀察即可」。
+
+規則：
+- 只描述數據呈現的事實，不推測新聞原因、不預測未來走勢。
+- 「進場」一詞指符合讀者自己的選股 SOP，不要寫成買賣建議或保證獲利。
+- 口語、清楚，避免專有名詞；必須用到時加括號白話說明。
+- 不要用 emoji、標題、條列符號或 markdown，直接輸出一段純文字。"""
+
+
+def generate_briefing(stocks: list, sox) -> str:
+    key = load_anthropic_key()
+    if not key:
+        print("  ⚠  找不到 ANTHROPIC_API_KEY，略過昨日解說")
+        return ""
+    lines = [f"SOX 前一交易日漲跌：{'未取得' if sox is None else f'{sox:+.2f}%'}", "",
+             "市場|代號|名稱|公司簡介|產業|昨日漲跌%|進場訊號|距目標區"]
+    for s in stocks:
+        d = s.get("data", {})
+        price = d.get("price")
+        if not price:
+            continue
+        low, high = parse_target(calc_target(s, d.get("ma120")))
+        _, label = entry_signal(price, low, high, d.get("slope"), d.get("vol_ok"))
+        dist = "在目標區"
+        if low is not None and price > high:
+            dist = f"高出 {round((price - high) / high * 100, 1)}%"
+        elif low is not None and price < low:
+            dist = f"低於 {round((low - price) / low * 100, 1)}%"
+        mk = "美股" if s.get("market") == "US" else "台股"
+        lines.append(f"{mk}|{s['code']}|{s['name']}|{s.get('desc', '')}|{s.get('industry', '')}|"
+                     f"{d.get('chg_pct', '—')}|{label}|{dist}")
+    try:
+        import anthropic
+        client = anthropic.Anthropic(api_key=key)
+        msg = client.beta.messages.create(
+            model="claude-opus-5-5",
+            max_tokens=4000,
+            output_config={"effort": "low"},
+            betas=["server-side-fallback-2026-07-01"],
+            fallbacks="default",
+            system=BRIEFING_SYSTEM,
+            messages=[{"role": "user", "content": "\n".join(lines)}],
+        )
+        if msg.stop_reason == "refusal":
+            print("  ⚠  昨日解說被拒絕產生")
+            return ""
+        return "".join(b.text for b in msg.content if b.type == "text").strip()
+    except Exception as e:
+        print(f"  ⚠  昨日解說產生失敗：{e}")
+        return ""
+
+
+def briefing_html(text: str, sox) -> str:
+    if not text:
+        return ""
+    sox_txt = "" if sox is None else f"SOX 前一交易日 {sox:+.2f}%｜"
+    return (f'<div class="briefing"><div class="briefing-title">昨日解說</div>'
+            f'<p>{html_escape(text)}</p>'
+            f'<div class="briefing-note">{sox_txt}由 Claude 依當日數據撰寫，只描述數字、不推測原因，不構成投資建議</div></div>')
+
+
+def entry_signal(price, low, high, slope, vol_ok):
+    """SOP 技術進場三條件（目標區、MA120 ↑、量足）合併判斷，回傳 (key, 標籤)"""
+    if not price or low is None:
+        return "na", "—"
+    if price > high:
+        return "wait", "未到價位"
+    if price < low:
+        return "below", "跌破目標區"
+    missing = []
+    if slope != "↑":
+        missing.append("趨勢未向上")
+    if vol_ok is not True:
+        missing.append("量不足")
+    if not missing:
+        return "go", "可進場"
+    return "check", "價位到・" + "、".join(missing)
+
+
+def signal_html(key: str, label: str) -> str:
+    return f'<span class="sig sig-{key}">{label}</span>'
 
 
 def load_event_log() -> list:
@@ -577,17 +767,15 @@ def build_stock_rows(stocks_data: list, fin_data: dict, us_info_data: dict = Non
         ma120  = d.get("ma120")
         slope  = d.get("slope", "—")
         vol_ok = d.get("vol_ok")
-        target = s.get("target", "")
+        target = calc_target(s, ma120)
         code   = s["code"]
-
-        # 美股目標區由 MA120 × 0.80~0.95 動態計算
-        if market == "US" and not target and ma120:
-            target = f"{ma120 * 0.80:.2f}~{ma120 * 0.95:.2f}"
 
         low, high = parse_target(target)
         status = row_status(price, low, high) if price else ""
         dist   = calc_distance(price, low, high) if (price and low) else "N/A"
         css    = f' class="{status}"' if status else ""
+        sig    = signal_html(*entry_signal(price, low, high, slope, vol_ok))
+        desc   = f'<div class="stock-desc">{s["desc"]}</div>' if s.get("desc") else ""
 
         # 警告 badge（降級觸發指示）
         st = (states or {}).get(code, {})
@@ -614,25 +802,27 @@ def build_stock_rows(stocks_data: list, fin_data: dict, us_info_data: dict = Non
 
         if market == "US":
             info  = (us_info_data or {}).get(code, {})
-            panel = us_fin_panel_html(code, info)
+            panel = us_fin_panel_html(code, info,
+                                      analyst_block_html(info.get("analyst"), price))
         else:
             fin   = fin_data.get(code) if fin_data else None
-            panel = fin_panel_html(code, fin)
+            panel = fin_panel_html(code, fin, analyst_block_html(d.get("analyst"), price))
 
         rows.append(f"""
         <tr{css}>
           <td>{code_cell}</td>
-          <td>{s['name']}</td>
+          <td class="name-cell">{s['name']}{desc}</td>
           <td>{fmt(price)}</td>
           <td>{fmt(ma60)}</td>
           <td>{fmt(ma120)}</td>
           <td style="text-align:center">{slope_html(slope)}</td>
           <td style="text-align:center">{vol_html(vol_ok)}</td>
           <td class="target-cell">{target if target else '<span class="na">N/A</span>'}</td>
+          <td>{sig}</td>
           <td class="dist-cell">{dist}</td>
         </tr>
         <tr id="fin-{code}" class="fin-panel-row" style="display:none">
-          <td colspan="9">{panel}</td>
+          <td colspan="10">{panel}</td>
         </tr>""")
     return "\n".join(rows)
 
@@ -664,7 +854,7 @@ def build_industry_sections(stocks_data: list, fin_data: dict,
           <th>代號</th><th>名稱</th><th>現價</th>
           <th>MA60</th><th>MA120</th>
           <th>趨勢</th><th>量能</th>
-          <th>觀察目標區</th><th>距目標區</th>
+          <th>觀察目標區</th><th>進場訊號</th><th>距目標區</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -718,8 +908,9 @@ def build_event_rows(events: list) -> str:
 def build_html(tw_stocks_data: list, us_stocks_data: list,
                tw_candidate_data: list, us_candidate_data: list,
                events: list, generated_at: str,
-               fin_data: dict, us_info_data: dict, states: dict) -> str:
-    tw_sections       = build_industry_sections(tw_stocks_data, fin_data, states=states)
+               fin_data: dict, us_info_data: dict, states: dict,
+               briefing: str = "") -> str:
+    tw_sections      = build_industry_sections(tw_stocks_data, fin_data, states=states)
     us_sections       = build_industry_sections(us_stocks_data, fin_data, us_info_data, states=states)
     tw_candidate_html = build_candidate_section(tw_candidate_data, fin_data, None, states)
     us_candidate_html = build_candidate_section(us_candidate_data, fin_data, us_info_data, states)
@@ -849,6 +1040,24 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
   .vol-ok  {{ color: var(--green); font-size: 12px; }}
   .vol-low {{ color: var(--red);   font-size: 12px; }}
   .vol-na  {{ color: var(--muted); font-size: 12px; font-style: italic; }}
+  .name-cell {{ min-width: 120px; }}
+  .stock-desc {{ font-size: 11px; color: var(--muted); line-height: 1.4; margin-top: 2px; max-width: 200px; }}
+  .sig {{ font-size: 12px; font-weight: 600; white-space: nowrap; padding: 2px 7px; border-radius: 4px; }}
+  .sig-go    {{ background: rgba(21,128,61,.12); color: var(--green); }}
+  .sig-check {{ background: rgba(180,83,9,.1);  color: var(--amber); }}
+  .sig-below {{ background: rgba(120,0,0,.1);   color: var(--red); }}
+  .sig-wait, .sig-na {{ color: var(--muted); font-weight: 400; padding: 0; }}
+
+  /* ── 昨日解說 ── */
+  .briefing {{
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent); border-radius: 10px;
+    padding: 14px 18px; margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(15,23,42,.05);
+  }}
+  .briefing-title {{ font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }}
+  .briefing p {{ margin: 0; font-size: 14px; line-height: 1.8; }}
+  .briefing-note {{ font-size: 11px; color: var(--muted); margin-top: 8px; }}
 
   /* ── 事件日誌卡 ── */
   .log-card {{
@@ -928,6 +1137,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
 
 <h1>美股下殺台股觀察</h1>
 <p class="subtitle">SOX 跌幅 ≥ 2% 時自動記錄，追蹤體質健康的台股連動情況</p>
+{briefing}
 
 <div class="tab-bar">
   <button class="tab-btn active" data-tab="us" onclick="switchTab('us')">美股</button>
@@ -1073,6 +1283,39 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
 </html>"""
 
 
+def write_mail_summary(tw_watchlist, us_watchlist, tw_candidates, us_candidates, generated_at,
+                       briefing="", sox=None):
+    """輸出 mail_summary.json 給 send_mail.py 使用"""
+    def entry(s):
+        d = s.get("data", {})
+        price, ma120 = d.get("price"), d.get("ma120")
+        target = calc_target(s, ma120)
+        low, high = parse_target(target)
+        status = row_status(price, low, high) if price else ""
+        sig_key, sig_label = entry_signal(price, low, high, d.get("slope"), d.get("vol_ok"))
+        dist = None
+        if price and low:
+            if price > high:
+                dist = f"高出 {round((price - high) / high * 100, 1)}%"
+            elif price < low:
+                dist = f"低於 {round((low - price) / low * 100, 1)}%"
+        return {"code": s["code"], "name": s["name"], "market": s.get("market", "TW"),
+                "price": price, "target": target, "status": status, "dist": dist,
+                "desc": s.get("desc", ""), "signal": sig_key, "signal_label": sig_label}
+
+    watch = [entry(s) for s in us_watchlist + tw_watchlist]
+    summary = {
+        "generated_at": generated_at,
+        "briefing": briefing,
+        "sox": sox,
+        "in_zone":   [e for e in watch if e["status"] == "in-zone"],
+        "near_zone": [e for e in watch if e["status"] == "near-zone"],
+        "candidates": [entry(s) for s in us_candidates + tw_candidates],
+    }
+    with open(MAIL_SUMMARY_FILE, "w", encoding="utf-8") as f:
+        json.dump(summary, f, ensure_ascii=False, indent=2)
+
+
 def main():
     print(f"\n{'='*52}")
     print(f"  美股下殺觀察網頁生成器 — {datetime.now().strftime('%Y/%m/%d %H:%M')}")
@@ -1101,6 +1344,11 @@ def main():
         else:
             print("  ✗  無資料")
         tw_stocks_data.append({**s, "data": d})
+
+    print(f"\n  抓取台股法人預估...\n")
+    for s in tw_stocks_data:
+        if s["data"]:
+            s["data"]["analyst"] = fetch_analyst(s["ticker"])
 
     # 美股股價
     print(f"\n  抓取美股 {len(us_config)} 檔股票資料...\n")
@@ -1155,12 +1403,21 @@ def main():
     print(f"  台股 主名單 {len(tw_watchlist)} / 候選區 {len(tw_candidates)}")
     print(f"  美股 主名單 {len(us_watchlist)} / 候選區 {len(us_candidates)}")
 
+    print(f"\n  產生昨日解說（Claude）...")
+    sox = fetch_sox_change()
+    briefing = generate_briefing(us_watchlist + tw_watchlist, sox)
+    print(f"  {'✓' if briefing else '✗'} 昨日解說")
+
     generated_at = datetime.now().strftime("%Y/%m/%d %H:%M")
     html = build_html(tw_watchlist, us_watchlist, tw_candidates, us_candidates,
-                      events, generated_at, fin_data, us_info_data, downgrade_states)
+                      events, generated_at, fin_data, us_info_data, downgrade_states,
+                      briefing_html(briefing, sox))
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
+
+    write_mail_summary(tw_watchlist, us_watchlist, tw_candidates, us_candidates, generated_at,
+                       briefing, sox)
 
     print(f"\n  ✅ 輸出完成 → {OUTPUT_FILE}")
     print(f"     開啟：open '{OUTPUT_FILE}'\n")
