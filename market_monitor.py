@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
 美股下殺事件監控器
-偵測前夜 SOX / NASDAQ 是否大跌，自動記錄台股連動情況
+偵測前夜 SOX / NASDAQ 是否大跌，自動記錄台股當天收盤連動情況
+（排程 14:30／16:00，台股收盤後才跑）
 """
 
 import yfinance as yf
 import json
 import os
-from datetime import datetime
+from datetime import datetime, date
 
 # ── 設定（可自行調整） ─────────────────────────────────
 SOX_THRESHOLD  = -2.0   # SOX 跌幅門檻（%），超過才記錄
@@ -50,6 +51,27 @@ def get_pct_change(ticker):
             return None
         prev = float(close.iloc[-2])
         last = float(close.iloc[-1])
+        return round((last - prev) / prev * 100, 2)
+    except Exception:
+        return None
+
+
+def get_tw_change_on(ticker, day: date, period="1mo"):
+    """台股在 day 當天收盤 vs 前一交易日收盤；當天還沒有日 K 就回 None"""
+    try:
+        hist = yf.download(ticker, period=period, interval="1d",
+                           progress=False, auto_adjust=True)
+        close = hist["Close"].dropna()
+        if hasattr(close, "columns"):
+            close = close.iloc[:, 0]
+        days = [d.date() for d in close.index]
+        if day not in days:
+            return None
+        i = days.index(day)
+        if i == 0:
+            return None
+        prev = float(close.iloc[i - 1])
+        last = float(close.iloc[i])
         return round((last - prev) / prev * 100, 2)
     except Exception:
         return None
@@ -98,6 +120,15 @@ def main():
         print(f"  {today_str} 已記錄過，略過\n")
         return
 
+    # 開機 RunAtLoad 可能在盤中觸發，盤中日 K 不是收盤價
+    if datetime.now().hour < 14:
+        print("  台股尚未收盤，等 14:30 排程\n")
+        return
+
+    if get_tw_change_on("2330.TW", datetime.now().date()) is None:
+        print("  台股今日收盤資料尚未更新（或休市），等下一輪\n")
+        return
+
     print(f"\n  ⚠ 觸發！開始抓台股資料...\n")
 
     sheet_rows = []
@@ -105,7 +136,7 @@ def main():
                   "nasdaq": nas_chg, "stocks": []}
 
     for ticker, name in STOCKS.items():
-        chg  = get_pct_change(ticker)
+        chg  = get_tw_change_on(ticker, datetime.now().date())
         code = ticker.split(".")[0]
 
         if chg is not None:
