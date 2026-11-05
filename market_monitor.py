@@ -87,9 +87,19 @@ def main():
         print(f"  SOX 跌幅未達門檻（{SOX_THRESHOLD}%），今日無需記錄\n")
         return
 
+    today_str  = datetime.now().strftime("%Y/%m/%d")
+
+    # 補跑與排程同一天可能各跑一次，已記錄就不再寫入（避免日誌與 Sheets 重複）
+    log = []
+    if os.path.exists(LOCAL_LOG):
+        with open(LOCAL_LOG, "r", encoding="utf-8") as f:
+            log = json.load(f)
+    if any(e.get("date") == today_str for e in log):
+        print(f"  {today_str} 已記錄過，略過\n")
+        return
+
     print(f"\n  ⚠ 觸發！開始抓台股資料...\n")
 
-    today_str  = datetime.now().strftime("%Y/%m/%d")
     sheet_rows = []
     event_data = {"date": today_str, "sox": sox_chg,
                   "nasdaq": nas_chg, "stocks": []}
@@ -118,10 +128,6 @@ def main():
             {"code": code, "name": name, "chg": chg, "beta": beta})
 
     # 本地 JSON 備份
-    log = []
-    if os.path.exists(LOCAL_LOG):
-        with open(LOCAL_LOG, "r", encoding="utf-8") as f:
-            log = json.load(f)
     log.append(event_data)
     with open(LOCAL_LOG, "w", encoding="utf-8") as f:
         json.dump(log, f, ensure_ascii=False, indent=2)
