@@ -19,8 +19,6 @@ OUTPUT_FILE    = os.path.join(BASE_DIR, "index.html")
 FINANCIAL_FILE  = os.path.join(BASE_DIR, "financial_data.json")
 DOWNGRADE_FILE  = os.path.join(BASE_DIR, "downgrade_state.json")
 MAIL_SUMMARY_FILE = os.path.join(BASE_DIR, "mail_summary.json")
-# Anthropic key 與盤後摘要（market digest）共用同一份 .env
-DIGEST_ENV = os.path.join(os.path.dirname(BASE_DIR), "daily-market-digest", ".env")
 
 INDUSTRY_COLORS = {
     "AI/半導體":        "#6366f1",
@@ -547,82 +545,6 @@ def fetch_sox_change():
         return None
 
 
-def load_anthropic_key() -> str:
-    key = os.environ.get("ANTHROPIC_API_KEY", "")
-    if not key and os.path.exists(DIGEST_ENV):
-        with open(DIGEST_ENV, encoding="utf-8") as f:
-            for line in f:
-                if line.strip().startswith("ANTHROPIC_API_KEY="):
-                    key = line.split("=", 1)[1].strip().strip('"').strip("'")
-    return key
-
-
-BRIEFING_SYSTEM = """你是幫非金融背景的上班族解讀「美股下殺台股觀察名單」的助理。讀者不認識這些公司，也看不懂技術指標。
-
-請根據提供的數據，寫一段 4–6 句的繁體中文解說，內容依序是：
-1. 昨日整體氣氛：SOX（費城半導體指數，代表美國晶片股整體表現）漲跌多少，名單整體偏漲或偏跌，哪個產業族群動得最明顯。
-2. 值得注意的股票：先講「可進場」的股票；若沒有，講「價位到」但還缺條件的股票，說明缺什麼。提到股票時用「名稱（一句話說它做什麼）」的方式介紹。
-3. 一句話總結今天可以優先看哪幾檔，或「今天沒有符合條件的，繼續觀察即可」。
-
-規則：
-- 只描述數據呈現的事實，不推測新聞原因、不預測未來走勢。
-- 「進場」一詞指符合讀者自己的選股 SOP，不要寫成買賣建議或保證獲利。
-- 口語、清楚，避免專有名詞；必須用到時加括號白話說明。
-- 不要用 emoji、標題、條列符號或 markdown，直接輸出一段純文字。"""
-
-
-def generate_briefing(stocks: list, sox) -> str:
-    key = load_anthropic_key()
-    if not key:
-        print("  ⚠  找不到 ANTHROPIC_API_KEY，略過昨日解說")
-        return ""
-    lines = [f"SOX 前一交易日漲跌：{'未取得' if sox is None else f'{sox:+.2f}%'}", "",
-             "市場|代號|名稱|公司簡介|產業|昨日漲跌%|進場訊號|距目標區"]
-    for s in stocks:
-        d = s.get("data", {})
-        price = d.get("price")
-        if not price:
-            continue
-        low, high = parse_target(calc_target(s, d.get("ma120")))
-        _, label = entry_signal(price, low, high, d.get("slope"), d.get("vol_ok"))
-        dist = "在目標區"
-        if low is not None and price > high:
-            dist = f"高出 {round((price - high) / high * 100, 1)}%"
-        elif low is not None and price < low:
-            dist = f"低於 {round((low - price) / low * 100, 1)}%"
-        mk = "美股" if s.get("market") == "US" else "台股"
-        lines.append(f"{mk}|{s['code']}|{s['name']}|{s.get('desc', '')}|{s.get('industry', '')}|"
-                     f"{d.get('chg_pct', '—')}|{label}|{dist}")
-    try:
-        import anthropic
-        client = anthropic.Anthropic(api_key=key)
-        msg = client.beta.messages.create(
-            model="claude-opus-5-5",
-            max_tokens=4000,
-            output_config={"effort": "low"},
-            betas=["server-side-fallback-2026-07-01"],
-            fallbacks="default",
-            system=BRIEFING_SYSTEM,
-            messages=[{"role": "user", "content": "\n".join(lines)}],
-        )
-        if msg.stop_reason == "refusal":
-            print("  ⚠  昨日解說被拒絕產生")
-            return ""
-        return "".join(b.text for b in msg.content if b.type == "text").strip()
-    except Exception as e:
-        print(f"  ⚠  昨日解說產生失敗：{e}")
-        return ""
-
-
-def briefing_html(text: str, sox) -> str:
-    if not text:
-        return ""
-    sox_txt = "" if sox is None else f"SOX 前一交易日 {sox:+.2f}%｜"
-    return (f'<div class="briefing"><div class="briefing-title">昨日解說</div>'
-            f'<p>{html_escape(text)}</p>'
-            f'<div class="briefing-note">{sox_txt}由 Claude 依當日數據撰寫，只描述數字、不推測原因，不構成投資建議</div></div>')
-
-
 def entry_signal(price, low, high, slope, vol_ok):
     """SOP 技術進場三條件（目標區、MA120 ↑、量足）合併判斷，回傳 (key, 標籤)"""
     if not price or low is None:
@@ -909,8 +831,7 @@ def build_event_rows(events: list) -> str:
 def build_html(tw_stocks_data: list, us_stocks_data: list,
                tw_candidate_data: list, us_candidate_data: list,
                events: list, generated_at: str,
-               fin_data: dict, us_info_data: dict, states: dict,
-               briefing: str = "") -> str:
+               fin_data: dict, us_info_data: dict, states: dict) -> str:
     tw_sections      = build_industry_sections(tw_stocks_data, fin_data, states=states)
     us_sections       = build_industry_sections(us_stocks_data, fin_data, us_info_data, states=states)
     tw_candidate_html = build_candidate_section(tw_candidate_data, fin_data, None, states)
@@ -1049,16 +970,6 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
   .sig-below {{ background: rgba(120,0,0,.1);   color: var(--red); }}
   .sig-wait, .sig-na {{ color: var(--muted); font-weight: 400; padding: 0; }}
 
-  /* ── 昨日解說 ── */
-  .briefing {{
-    background: var(--card); border: 1px solid var(--border);
-    border-left: 4px solid var(--accent); border-radius: 10px;
-    padding: 14px 18px; margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(15,23,42,.05);
-  }}
-  .briefing-title {{ font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }}
-  .briefing p {{ margin: 0; font-size: 14px; line-height: 1.8; }}
-  .briefing-note {{ font-size: 11px; color: var(--muted); margin-top: 8px; }}
 
   /* ── 事件日誌卡 ── */
   .log-card {{
@@ -1138,7 +1049,6 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
 
 <h1>美股下殺台股觀察</h1>
 <p class="subtitle">SOX 跌幅 ≥ 2% 時自動記錄，追蹤體質健康的台股連動情況</p>
-{briefing}
 
 <div class="tab-bar">
   <button class="tab-btn active" data-tab="us" onclick="switchTab('us')">美股</button>
@@ -1285,7 +1195,7 @@ def build_html(tw_stocks_data: list, us_stocks_data: list,
 
 
 def write_mail_summary(tw_watchlist, us_watchlist, tw_candidates, us_candidates, generated_at,
-                       briefing="", sox=None):
+                       sox=None):
     """輸出 mail_summary.json 給 send_mail.py 使用"""
     def entry(s):
         d = s.get("data", {})
@@ -1307,7 +1217,6 @@ def write_mail_summary(tw_watchlist, us_watchlist, tw_candidates, us_candidates,
     watch = [entry(s) for s in us_watchlist + tw_watchlist]
     summary = {
         "generated_at": generated_at,
-        "briefing": briefing,
         "sox": sox,
         "in_zone":   [e for e in watch if e["status"] == "in-zone"],
         "near_zone": [e for e in watch if e["status"] == "near-zone"],
@@ -1404,21 +1313,16 @@ def main():
     print(f"  台股 主名單 {len(tw_watchlist)} / 候選區 {len(tw_candidates)}")
     print(f"  美股 主名單 {len(us_watchlist)} / 候選區 {len(us_candidates)}")
 
-    print(f"\n  產生昨日解說（Claude）...")
     sox = fetch_sox_change()
-    briefing = generate_briefing(us_watchlist + tw_watchlist, sox)
-    print(f"  {'✓' if briefing else '✗'} 昨日解說")
 
     generated_at = datetime.now().strftime("%Y/%m/%d %H:%M")
     html = build_html(tw_watchlist, us_watchlist, tw_candidates, us_candidates,
-                      events, generated_at, fin_data, us_info_data, downgrade_states,
-                      briefing_html(briefing, sox))
+                      events, generated_at, fin_data, us_info_data, downgrade_states)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
 
-    write_mail_summary(tw_watchlist, us_watchlist, tw_candidates, us_candidates, generated_at,
-                       briefing, sox)
+    write_mail_summary(tw_watchlist, us_watchlist, tw_candidates, us_candidates, generated_at, sox)
 
     print(f"\n  ✅ 輸出完成 → {OUTPUT_FILE}")
     print(f"     開啟：open '{OUTPUT_FILE}'\n")

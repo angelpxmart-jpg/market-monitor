@@ -17,10 +17,7 @@ import yfinance as yf
 BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
 SUMMARY_FILE = os.path.join(BASE_DIR, "mail_summary.json")
 SENT_FILE    = os.path.join(BASE_DIR, "logs", "mail_sent.txt")
-# Gmail 應用程式密碼與盤後摘要共用同一份 .env
-DIGEST_ENV   = os.path.join(os.path.dirname(BASE_DIR), "daily-market-digest", ".env")
-
-# 寄件／收件地址放在本機 .env（repo 公開，不寫進程式）
+# 寄件／收件地址與 Gmail 應用程式密碼放在本機 .env（repo 公開，不寫進程式）
 LOCAL_ENV  = os.path.join(BASE_DIR, ".env")
 
 
@@ -41,12 +38,7 @@ NAVY, RED, AMBER, GREEN, MUTED = "#003049", "#C1121F", "#b45309", "#15803d", "#6
 
 
 def load_app_pw() -> str:
-    pw = os.environ.get("GMAIL_APP_PW", "")
-    if not pw and os.path.exists(DIGEST_ENV):
-        with open(DIGEST_ENV, encoding="utf-8") as f:
-            for line in f:
-                if line.strip().startswith("GMAIL_APP_PW="):
-                    pw = line.split("=", 1)[1].strip().strip('"').strip("'")
+    pw = os.environ.get("GMAIL_APP_PW", "") or read_env(LOCAL_ENV, "GMAIL_APP_PW")
     return pw.replace("\xa0", "").replace(" ", "")
 
 
@@ -89,16 +81,6 @@ def section(title: str, color: str, body: str) -> str:
             f'{body}</div>')
 
 
-def briefing_block(text: str) -> str:
-    if not text:
-        return ""
-    return (f'<div style="margin:14px 0 0;padding:12px 14px;background:#f8fafc;border-left:4px solid {RED};'
-            f'font-size:14px;line-height:1.8;">'
-            f'<div style="font-weight:bold;color:{RED};font-size:13px;margin-bottom:4px;">昨日解說</div>'
-            f'{html.escape(text)}'
-            f'<div style="font-size:11px;color:{MUTED};margin-top:6px;">由 Claude 依當日數據撰寫，只描述數字、不推測原因，不構成投資建議</div></div>')
-
-
 def split_in_zone(s: dict):
     go    = [e for e in s["in_zone"] if e.get("signal") == "go"]
     check = [e for e in s["in_zone"] if e.get("signal") != "go"]
@@ -116,7 +98,6 @@ def build_html(s: dict, sox) -> str:
     return f"""<div style="font-family:-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;max-width:560px;margin:0 auto;padding:16px;background:#ffffff;color:{NAVY};">
 <div style="font-size:18px;font-weight:bold;">美股下殺台股觀察｜{datetime.now().strftime('%m/%d')}</div>
 <div style="font-size:14px;margin-top:6px;">{sox_txt}</div>
-{briefing_block(s.get("briefing", ""))}
 {section(f"可進場：三個條件都符合（{len(go)}）", GREEN, stock_table(go, GREEN, False))}
 {section(f"價位到了，但條件還沒齊（{len(check)}）", AMBER, stock_table(check, AMBER, False))}
 {section(f"接近目標區 ≤10%（{len(s['near_zone'])}）", MUTED, stock_table(s["near_zone"], MUTED, True))}
